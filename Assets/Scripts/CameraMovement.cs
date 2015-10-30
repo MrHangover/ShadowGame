@@ -14,8 +14,8 @@ public class CameraMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Mouse look
-		transform.Rotate(new Vector3(-Input.GetAxis("Mouse Y") * sensibility, 0f, 0f));
-		transform.Rotate(new Vector3(0f, Input.GetAxis("Mouse X") * sensibility, 0f), Space.World);
+		//transform.Rotate(new Vector3(-Input.GetAxis("Mouse Y") * sensibility, 0f, 0f));
+		//transform.Rotate(new Vector3(0f, Input.GetAxis("Mouse X") * sensibility, 0f), Space.World);
 
 		//Movement
 		Vector3 input = new Vector3 (Input.GetAxis("HorizontalCam"), 0f, Input.GetAxis ("VerticalCam"));

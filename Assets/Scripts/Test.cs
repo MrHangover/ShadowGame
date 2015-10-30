@@ -42,6 +42,15 @@ public class Test : MonoBehaviour {
 				shadowObjectsReceiverSide.Add(Instantiate(shadowFake, transform.position, transform.rotation) as GameObject);
 			}
 
+            for (int i = 0; i < shadowObjectsCasterSide.Count; i++){
+                shadowObjectsCasterSide[i].transform.position = transform.position;
+                //shadowObjectsCasterSide[i].transform.localScale = transform.localScale;
+                //shadowObjectsCasterSide[i].transform.rotation = transform.rotation;
+                shadowObjectsReceiverSide[i].transform.position = transform.position;
+                //shadowObjectsReceiverSide[i].transform.localScale = transform.localScale;
+                //shadowObjectsReceiverSide[i].transform.rotation = transform.rotation;
+            }
+            
             //Failsafe, in case lights are removed during runtime.
 			while(shadowObjectsCasterSide.Count > numOfLights){
 				shadowObjectsCasterSide.RemoveAt(shadowObjectsCasterSide.Count);
@@ -49,20 +58,22 @@ public class Test : MonoBehaviour {
 			}
 
             //For every light, calculate the shadows cast on the wall.
-			int shadowIndex = -1;
-			for(int j = 0; j < lights.Length; j++){
+            int shadowIndex = 0;
+            Vector3[] worldVertices = mesh.vertices;
+            for (int j = 0; j < lights.Length; j++){
 				if(lights[j].enabled && lights[j].tag == "ShadowCast"){
 					for(int i = 0; i < casterVertices.Length / 2; i++){
 						RaycastHit hit;
-						Ray ray = new Ray(transform.position + mesh.vertices[i], transform.position + mesh.vertices[i] - lights[j].transform.position);
-						//Debug.DrawRay(transform.position + mesh.vertices[i], transform.position + mesh.vertices[i] - Camera.main.transform.position, Color.red);
+                        worldVertices[i] = transform.TransformPoint(new Vector3(mesh.vertices[i].x, mesh.vertices[i].y, mesh.vertices[i].z));
+                        //Ray ray = new Ray(transform.position + mesh.vertices[i], transform.position + mesh.vertices[i] - lights[j].transform.position);
+                        Ray ray = new Ray(worldVertices[i], worldVertices[i] - lights[j].transform.position);
+                        Debug.DrawRay(worldVertices[i], worldVertices[i] - lights[j].transform.position, Color.red);
 						if(Physics.Raycast(ray, out hit)){
-							casterVertices[i] = transform.InverseTransformPoint(new Vector3(-21.01f, hit.point.y, hit.point.z));
+							casterVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(new Vector3(-21.01f, hit.point.y, hit.point.z));
                             recieverVertices[i] = casterVertices[i] + Vector3.right * 1.02f;
                             casterVertices[casterVertices.Length/2 + i] = recieverVertices[i];
 						}
 					}
-					shadowIndex++;
 
                     //Assign meshes and colliders
 					Mesh shadowMesh = shadowObjectsCasterSide[shadowIndex].GetComponent<MeshFilter>().mesh;
@@ -75,8 +86,10 @@ public class Test : MonoBehaviour {
 					shadowMesh = shadowObjectsReceiverSide[shadowIndex].GetComponent<MeshFilter>().mesh;
 					shadowMesh.vertices = recieverVertices;
 					shadowMesh.RecalculateBounds();
-				}
+
+                    shadowIndex++;
+                }
 			}
-		}
+        }
 	}
 }
