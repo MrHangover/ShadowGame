@@ -3,9 +3,14 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
+    [Range(0.0f, 50.0f)]
 	public float maxSpeed = 5f;
-	public float acceleration = 5f;
-	public float jumpSpeed = 2f;
+    [Range(0.0f, 50.0f)]
+    public float acceleration = 5f;
+    [Range(0.0f, 50.0f)]
+    public float jumpSpeed = 2f;
+    [Range(0.0f, 50.0f)]
+    public float friction = 1f;
 	Rigidbody body;
 	Collider playerCollider;
 	bool isGrounded;
@@ -62,15 +67,15 @@ public class PlayerMovement : MonoBehaviour {
 			//Stopping movement if no input is given
 			if(Input.GetAxis("HorizontalPlatform") == 0f){
 				if(body.velocity.z > 0f){
-					if(body.velocity.z - acceleration/4f >= 0f){
-						body.velocity -= Vector3.forward * (acceleration/6f);
+					if(body.velocity.z - friction >= 0f){
+						body.velocity -= Vector3.forward * friction;
 					}else{
 						body.velocity = new Vector3(body.velocity.x, body.velocity.y, 0f);
 					}
 				}
 				if(body.velocity.z < 0f){
-					if(body.velocity.z + acceleration/4f <= 0f){
-						body.velocity += Vector3.forward * (acceleration/6f);
+					if(body.velocity.z + friction <= 0f){
+						body.velocity += Vector3.forward * friction;
 					}else{
 						body.velocity = new Vector3(body.velocity.x, body.velocity.y, 0f);
 					}

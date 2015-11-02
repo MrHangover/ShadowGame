@@ -29,7 +29,7 @@ public class Test : MonoBehaviour {
             Vector3[] recieverVertices = mesh.vertices;
 
             //Count the number of lights in the scene that affect shadows.
-			int numOfLights = 0;
+            int numOfLights = 0;
 			for(int m = 0; m < lights.Length; m++){
 				if(lights[m].tag == "ShadowCast"){
 					numOfLights++;
@@ -78,14 +78,15 @@ public class Test : MonoBehaviour {
                     //Assign meshes and colliders
 					Mesh shadowMesh = shadowObjectsCasterSide[shadowIndex].GetComponent<MeshFilter>().mesh;
 					shadowMesh.vertices = casterVertices;
-					shadowMesh.RecalculateBounds();
-					MeshCollider meshCol = shadowObjectsCasterSide[shadowIndex].GetComponent<MeshCollider>();
+                    shadowMesh.RecalculateNormals();
+                    shadowMesh.RecalculateBounds();
+                    MeshCollider meshCol = shadowObjectsCasterSide[shadowIndex].GetComponent<MeshCollider>();
 					meshCol.sharedMesh = null;
 					meshCol.sharedMesh = shadowMesh;
 
 					shadowMesh = shadowObjectsReceiverSide[shadowIndex].GetComponent<MeshFilter>().mesh;
 					shadowMesh.vertices = recieverVertices;
-					shadowMesh.RecalculateBounds();
+                    shadowMesh.RecalculateBounds();
 
                     shadowIndex++;
                 }
