@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpSpeed = 2f;
     [Range(0.0f, 50.0f)]
     public float friction = 1f;
-	Rigidbody body;
+    public int verticalRayPrecision = 4;
+    Rigidbody body;
 	Collider playerCollider;
 	bool isGrounded;
 	Vector3 tempVelocity;
