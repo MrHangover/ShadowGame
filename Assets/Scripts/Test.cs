@@ -69,7 +69,7 @@ public class Test : MonoBehaviour {
                         Ray ray = new Ray(worldVertices[i], worldVertices[i] - lights[j].transform.position);
                         Debug.DrawRay(worldVertices[i], worldVertices[i] - lights[j].transform.position, Color.red);
 						if(Physics.Raycast(ray, out hit)){
-							casterVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(new Vector3(-21.01f, hit.point.y, hit.point.z));
+							casterVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(new Vector3(-0.51f, hit.point.y, hit.point.z));
                             recieverVertices[i] = casterVertices[i] + Vector3.right * 1.02f;
                             casterVertices[casterVertices.Length/2 + i] = recieverVertices[i];
 						}
