@@ -6,6 +6,8 @@ public class DeathLight : MonoBehaviour {
     public float angle = 10f;
     public float width = 1.02f;
     public float range = 60f;
+	int shadowLayer = 8;
+	int playerLayer = 10;
     Vector3[] vertices;
 
     Mesh mesh;
@@ -151,4 +153,23 @@ public class DeathLight : MonoBehaviour {
         meshCol.sharedMesh = null;
         meshCol.sharedMesh = mesh;
     }
+
+//	void OnTriggerEnter(Collider col){
+//		if(col.gameObject.tag == "Player"){
+//			Physics.IgnoreLayerCollision(shadowLayer, playerLayer, true);
+//		}
+//	}
+
+//	void OnTrigger(Collider col){
+//		if(col.gameObject.tag == "Player"){
+//			Physics.IgnoreLayerCollision(shadowLayer, playerLayer, true);
+//		}
+//	}
+
+//	void OnTriggerExit(Collider col){
+//		Debug.Log("WTH");
+//		if(col.gameObject.tag == "Player"){
+//			Physics.IgnoreLayerCollision(shadowLayer, playerLayer, false);
+//		}
+//	}
 }

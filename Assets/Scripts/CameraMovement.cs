@@ -3,15 +3,21 @@ using System.Collections;
 
 
 public class CameraMovement : MonoBehaviour {
-
+	
 	public float movementSpeed = 30f;
 	public float lookSensitivity = 10f;
-    public float movementLimitXAxis = 19f;
+	public float movementLimitXAxis = 19f;
     int sideOfWall;
+	Light light;
+	float startSpotAngle;
+	float startIntensity;
 
 	// Use this for initialization
 	void Start () {
         sideOfWall = (int)Mathf.Sign(transform.position.x);
+		light = GetComponent<Light>();
+		startSpotAngle = light.spotAngle;
+		startIntensity = light.intensity;
 	}
 	
 	// Update is called once per frame
@@ -22,7 +28,7 @@ public class CameraMovement : MonoBehaviour {
 
 		//Movement
 		Vector3 input = new Vector3 (0f, Input.GetAxis("VerticalLight"), Input.GetAxis("HorizontalLight"));
-		if (input.magnitude > 1f) {
+		if (input.magnitude > 1f){
 			input.Normalize ();
 		}
 
@@ -33,5 +39,23 @@ public class CameraMovement : MonoBehaviour {
             move = new Vector3(0f, input.y, input.z);
 
         transform.position += move * movementSpeed * Time.deltaTime;
+
+		if(light.spotAngle != startSpotAngle){
+			light.spotAngle = Mathf.Lerp(light.spotAngle, startSpotAngle, 0.05f);
+			if(Mathf.Abs(light.spotAngle - startSpotAngle) < 0.01f){
+				light.spotAngle = startSpotAngle;
+			}
+		}
+		if(light.intensity != startIntensity){
+			light.intensity = Mathf.Lerp(light.intensity, startIntensity, 0.05f);
+			if(Mathf.Abs(light.intensity - startIntensity) < 0.01f){
+				light.intensity = startIntensity;
+			}
+		}
+	}
+
+	public void Flash(){
+		light.spotAngle = 179f;
+		light.intensity = 8f;
 	}
 }
