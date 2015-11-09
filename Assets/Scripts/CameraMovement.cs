@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class CameraMovement : MonoBehaviour {
 
-	public float speed = 5f;
-	public float sensibility = 2f;
+	public float speed = 30f;
+	public float sensibility = 0.1f;
 
 	// Use this for initialization
 	void Start () {
