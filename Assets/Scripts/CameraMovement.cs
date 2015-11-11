@@ -11,6 +11,8 @@ public class CameraMovement : MonoBehaviour {
 	Light light;
 	float startSpotAngle;
 	float startIntensity;
+    Vector3 respawnPosition;
+    Animator animator;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +20,8 @@ public class CameraMovement : MonoBehaviour {
 		light = GetComponent<Light>();
 		startSpotAngle = light.spotAngle;
 		startIntensity = light.intensity;
+        animator = GetComponent<Animator>();
+        respawnPosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -58,4 +62,16 @@ public class CameraMovement : MonoBehaviour {
 		light.spotAngle = 179f;
 		light.intensity = 8f;
 	}
+
+    public void Flicker()
+    {
+        animator.SetBool("Flicker", true);
+        Invoke("StopFlicker", 1f);
+    }
+
+    public void StopFlicker()
+    {
+        animator.SetBool("Flicker", false);
+        transform.position = respawnPosition;
+    }
 }
