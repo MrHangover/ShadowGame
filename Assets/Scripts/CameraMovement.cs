@@ -12,6 +12,7 @@ public class CameraMovement : MonoBehaviour {
 	float startSpotAngle;
 	float startIntensity;
     Vector3 respawnPosition;
+    Quaternion respawnRotation;
     Animator animator;
 
 	// Use this for initialization
@@ -22,6 +23,7 @@ public class CameraMovement : MonoBehaviour {
 		startIntensity = light.intensity;
         animator = GetComponent<Animator>();
         respawnPosition = transform.position;
+        respawnRotation = transform.rotation;
 	}
 	
 	// Update is called once per frame
@@ -66,12 +68,19 @@ public class CameraMovement : MonoBehaviour {
     public void Flicker()
     {
         animator.SetBool("Flicker", true);
-        Invoke("StopFlicker", 1f);
+        Invoke("StopFlicker", 0.95f);
     }
 
     public void StopFlicker()
     {
         animator.SetBool("Flicker", false);
         transform.position = respawnPosition;
+        Invoke("Respawn", 0.5f);
+    }
+
+    public void Respawn()
+    {
+        transform.position = respawnPosition;
+        transform.rotation = respawnRotation;
     }
 }

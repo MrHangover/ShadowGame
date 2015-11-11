@@ -107,15 +107,26 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Die(){
-		transform.position = respawnPosition;
-		isFrozen = true;
 		for(int i = 0; i < lights.Length; i++){
 			CameraMovement script = lights[i].GetComponent<CameraMovement>();
-			script.Flash();
-			playerCollider.isTrigger = false;
-			playerCollider.enabled = true;
+			script.Flicker();
+            Invoke("Respawn", 0.95f);
 		}
 	}
+
+    void Respawn()
+    {
+        transform.position = respawnPosition;
+        playerCollider.isTrigger = false;
+        playerCollider.enabled = true;
+        isFrozen = true;
+        Invoke("StopFreeze", 0.5f);
+    }
+
+    void StopFreeze()
+    {
+        isFrozen = false;
+    }
 
 	void CheckCollisions(){
 		isGrounded = false;
