@@ -129,12 +129,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 	void CheckCollisions(){
+        bool oldGround = isGrounded;
 		isGrounded = false;
 		Vector3 rayOrigin;
 		if(verticalRayPrecision < 2){
 			rayOrigin = new Vector3(transform.position.x, transform.position.y - playerCollider.bounds.extents.y + 0.2f, transform.position.z);
 			RaycastHit hit;
-			Debug.DrawRay(rayOrigin, Vector3.down * 0.25f, Color.red);
 			if(Physics.Raycast(rayOrigin, Vector3.down, out hit, 0.25f, shadowLayer)){
 				isGrounded = true;
 			}
@@ -144,17 +144,37 @@ public class PlayerMovement : MonoBehaviour {
 				rayOrigin = new Vector3(transform.position.x, transform.position.y - playerCollider.bounds.extents.y + 0.2f,
 				                        transform.position.z - playerCollider.bounds.extents.z + spacing * i);
 				RaycastHit hit;
-				Debug.DrawRay(rayOrigin, Vector3.down * 0.25f, Color.red);
-				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, 0.25f, shadowLayer)){
+				Debug.DrawRay(rayOrigin, Vector3.down * body.velocity.y * Time.fixedDeltaTime + Vector3.down * 0.21f, Color.red);
+				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, body.velocity.y * Time.fixedDeltaTime + 0.21f, shadowLayer)){
 					isGrounded = true;
 				}
 			}
 		}
+        if(oldGround && !isGrounded && body.velocity.y <= 0f)
+        {
+            float highestGround = -99999f;
+            float spacing = playerCollider.bounds.size.z / (verticalRayPrecision - 1f);
+            for (int i = 0; i < verticalRayPrecision; i++)
+            {
+                rayOrigin = new Vector3(transform.position.x, transform.position.y,
+                                        transform.position.z - playerCollider.bounds.extents.z + spacing * i);
+                RaycastHit hit;
+                if (Physics.Raycast(rayOrigin, Vector3.down, out hit, body.velocity.y * Time.fixedDeltaTime + 1.2f, shadowLayer))
+                {
+                    isGrounded = true;
+                    if (hit.point.y > highestGround)
+                        highestGround = hit.point.y;
+                }
+            }
+            if (isGrounded)
+            {
+                transform.position = new Vector3(transform.position.x, highestGround + playerCollider.bounds.extents.y, transform.position.z);
+            }
+        }
 	}
 
 	void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag.ToString());
 		if(other.gameObject.tag != "DeathLight")
         {
             playerCollider.isTrigger = false;
