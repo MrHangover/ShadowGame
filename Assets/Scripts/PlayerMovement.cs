@@ -152,28 +152,16 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-//	void OnCollisionEnter(Collision other) {
-//		if(other.collider.isTrigger == false){
-//			for(int i = 0; i < other.contacts.Length; i++){
-//				if(other.contacts[i].point.y <= transform.position.y - transform.localScale.y/2f){
-//					isGrounded = true;
-//				}
-//			}
-//		}
-//	}
-//
-//	void OnCollision(Collision other) {
-//		if(other.collider.isTrigger == false){
-//			for(int i = 0; i < other.contacts.Length; i++){
-//				if(other.contacts[i].point.y <= transform.position.y - transform.localScale.y/2f){
-//					isGrounded = true;
-//				}
-//			}
-//		}
-//	}
-
-//	void OnCollisionExit(Collision other) {
-//		Debug.Log(other.gameObject.ToString());
-//		isGrounded = false;
-//	}
+	void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.tag.ToString());
+		if(other.gameObject.tag != "DeathLight")
+        {
+            playerCollider.isTrigger = false;
+        }
+        else
+        {
+            playerCollider.isTrigger = true;
+        }
+	}
 }
