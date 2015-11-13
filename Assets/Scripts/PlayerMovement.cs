@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 	bool isFrozen;
 	Vector3 respawnPosition;
 	float jumpEnd;
+    string onMac = "";
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +35,10 @@ public class PlayerMovement : MonoBehaviour {
 		tempVelocity = body.velocity;
 		tempPosition = transform.position;
 		respawnPosition = transform.position;
+        if(Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer)
+        {
+            onMac = "Mac";
+        }
 	}
 	
 	// Update is called once per frame
@@ -61,17 +66,17 @@ public class PlayerMovement : MonoBehaviour {
 		if(!isFrozen){
 			CheckCollisions();
 			//Movement
-			if(body.velocity.z < maxSpeed && Input.GetAxis("HorizontalPlatform") < 0f){
-				if(body.velocity.z - Input.GetAxis("HorizontalPlatform") * acceleration < maxSpeed){
-					body.velocity += Vector3.forward * -Input.GetAxis("HorizontalPlatform") * acceleration;
+			if(body.velocity.z < maxSpeed && Input.GetAxis("HorizontalPlatform" + onMac) < 0f){
+				if(body.velocity.z - Input.GetAxis("HorizontalPlatform" + onMac) * acceleration < maxSpeed){
+					body.velocity += Vector3.forward * -Input.GetAxis("HorizontalPlatform" + onMac) * acceleration;
 				}
 				else{
 					body.velocity = new Vector3(body.velocity.x, body.velocity.y, maxSpeed);
 				}
 			}
-			if(body.velocity.z > -maxSpeed && Input.GetAxis("HorizontalPlatform") > 0f){
-				if(body.velocity.z - Input.GetAxis("HorizontalPlatform") * acceleration > -maxSpeed){
-					body.velocity += Vector3.forward * -Input.GetAxis("HorizontalPlatform") * acceleration;
+			if(body.velocity.z > -maxSpeed && Input.GetAxis("HorizontalPlatform" + onMac) > 0f){
+				if(body.velocity.z - Input.GetAxis("HorizontalPlatform" + onMac) * acceleration > -maxSpeed){
+					body.velocity += Vector3.forward * -Input.GetAxis("HorizontalPlatform" + onMac) * acceleration;
 				}
 				else{
 					body.velocity = new Vector3(body.velocity.x, body.velocity.y, -maxSpeed);
@@ -79,7 +84,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 
 			//Stopping movement if no input is given
-			if(Input.GetAxis("HorizontalPlatform") == 0f){
+			if(Input.GetAxis("HorizontalPlatform" + onMac) == 0f){
 				if(body.velocity.z > 0f){
 					if(body.velocity.z - friction >= 0f){
 						body.velocity -= Vector3.forward * friction;
@@ -97,10 +102,10 @@ public class PlayerMovement : MonoBehaviour {
 			}
 
 			//Jumping
-			if(isGrounded && Input.GetButton("Jump")){
+			if(isGrounded && Input.GetButton("Jump" + onMac)){
 				jumpEnd = Time.time + jumpHoldTime;
 			}
-			if(jumpEnd > Time.time && Input.GetButton("Jump")){
+			if(jumpEnd > Time.time && Input.GetButton("Jump" + onMac)){
 				body.velocity = new Vector3(body.velocity.x, jumpSpeed, body.velocity.z);
 			}
 		}
@@ -150,7 +155,7 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			}
 		}
-        if(oldGround && !isGrounded && body.velocity.y <= 0f)
+        if (oldGround && !isGrounded && body.velocity.y <= 0f && playerCollider.isTrigger == false)
         {
             float highestGround = -99999f;
             float spacing = playerCollider.bounds.size.z / (verticalRayPrecision - 1f);
