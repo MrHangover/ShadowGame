@@ -62,7 +62,7 @@ public class DeathLight : MonoBehaviour {
                         {
                             if(y == 0)
                             {
-                                zPos = transform.position.z - 0.1f;
+                                zPos = transform.position.z + 0.4f;
                             }
                             else
                             {
@@ -73,7 +73,7 @@ public class DeathLight : MonoBehaviour {
                         {
                             if (y == 0)
                             {
-                                zPos = transform.position.z + 0.1f;
+                                zPos = transform.position.z - 0.4f;
                             }
                             else
                             {

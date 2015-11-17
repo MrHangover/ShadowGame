@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () {
 		body = GetComponent<Rigidbody>();
 		playerCollider = GetComponent<Collider>();
-		isFrozen = true;
+		isFrozen = false;
 		tempVelocity = body.velocity;
 		tempPosition = transform.position;
 		respawnPosition = transform.position;
@@ -44,15 +44,6 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Pausing/stopping movement
-		if(Input.GetButtonDown("Fire1") && !isFrozen){
-			tempVelocity = body.velocity;
-			tempPosition = transform.position;
-			isFrozen = true;
-		}else if(Input.GetButtonDown("Fire1") && isFrozen){
-			body.velocity = tempVelocity;
-			transform.position = tempPosition;
-			isFrozen = false;
-		}
 		if(isFrozen){
 			transform.position = tempPosition;
 		}
@@ -60,6 +51,15 @@ public class PlayerMovement : MonoBehaviour {
 		if(transform.position.y < deathTriggerHeight){
 			Die();
 		}
+
+        if(body.velocity.z < 0f)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 1f);
+        }
+        else if(body.velocity.z > 0f)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, -1f);
+        }
 	}
 
 	void FixedUpdate(){
@@ -125,11 +125,15 @@ public class PlayerMovement : MonoBehaviour {
         playerCollider.isTrigger = false;
         playerCollider.enabled = true;
         isFrozen = true;
-        Invoke("StopFreeze", 0.5f);
+        body.velocity = new Vector3(0f, 0f, 0f);
+        tempPosition = transform.position;
+        body.useGravity = false;
+        Invoke("StopFreeze", 1f);
     }
 
     void StopFreeze()
     {
+        body.useGravity = true;
         isFrozen = false;
     }
 

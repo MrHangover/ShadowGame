@@ -44,6 +44,7 @@ public class CameraMovement : MonoBehaviour {
 		}
 
         Vector3 move;
+        Debug.Log("LightForward: " + Input.GetAxis("LightForward").ToString() + "\tLightBackward: " + Input.GetAxis("LightBackward").ToString());
         if(transform.position.x * sideOfWall > movementLimitXAxis || Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac) < 0f)
 		    move = new Vector3 ((Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac)) * transform.forward.x, input.y, input.z);
         else

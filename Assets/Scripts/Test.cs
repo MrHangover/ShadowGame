@@ -8,6 +8,8 @@ public class Test : MonoBehaviour {
 	Light[] lights;
 	List<GameObject> shadowObjectsCasterSide;
 	List<GameObject> shadowObjectsReceiverSide;
+    Mesh mesh;
+
 	public GameObject shadowObject;
     public GameObject shadowFake;
     public Material shadowMaterial;
@@ -19,12 +21,19 @@ public class Test : MonoBehaviour {
 		lights = FindObjectsOfType<Light>() as Light[];
 		shadowObjectsCasterSide = new List<GameObject>();
 		shadowObjectsReceiverSide = new List<GameObject>();
-	}
+        mesh = GetComponent<MeshFilter>().mesh;
+        Mesh tempShadow = shadowObject.GetComponent<MeshFilter>().mesh;
+        tempShadow.vertices = mesh.vertices;
+        tempShadow.triangles = mesh.triangles;
+
+        tempShadow = shadowFake.GetComponent<MeshFilter>().mesh;
+        tempShadow.vertices = mesh.vertices;
+        tempShadow.triangles = mesh.triangles;
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		if(localRenderer.isVisible){    //Should only run if the object can be seen by the camera, doesn't seem to work though.
-			Mesh mesh = GetComponent<MeshFilter>().mesh;
             //Initialize the vertex arrays. The caster vertices need to be twice length, since we want the platform to go through the wall (one on each side.)
             Vector3[] casterVertices = new Vector3[mesh.vertices.Length * 2];
             Vector3[] recieverVertices = mesh.vertices;
@@ -70,8 +79,9 @@ public class Test : MonoBehaviour {
                         Ray ray = new Ray(worldVertices[i], worldVertices[i] - lights[j].transform.position);
                         Debug.DrawRay(worldVertices[i], worldVertices[i] - lights[j].transform.position, Color.red);
 						if(Physics.Raycast(ray, out hit, 1000f, wallLayer)){
-							casterVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(new Vector3(-0.51f, hit.point.y, hit.point.z));
-                            recieverVertices[i] = casterVertices[i] + Vector3.right * 1.02f;
+                            Vector3 hitPoint = new Vector3(0.51f, hit.point.y, hit.point.z);
+                            casterVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(hitPoint);
+                            recieverVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(hitPoint - Vector3.right * 1.02f);
                             casterVertices[casterVertices.Length/2 + i] = recieverVertices[i];
 						}
 					}
@@ -79,15 +89,18 @@ public class Test : MonoBehaviour {
                     //Assign meshes and colliders
 					Mesh shadowMesh = shadowObjectsCasterSide[shadowIndex].GetComponent<MeshFilter>().mesh;
 					shadowMesh.vertices = casterVertices;
-                    shadowMesh.RecalculateNormals();
+                    shadowMesh.triangles = mesh.triangles;
                     shadowMesh.RecalculateBounds();
+                    shadowMesh.RecalculateNormals();
                     MeshCollider meshCol = shadowObjectsCasterSide[shadowIndex].GetComponent<MeshCollider>();
 					meshCol.sharedMesh = null;
 					meshCol.sharedMesh = shadowMesh;
 
 					shadowMesh = shadowObjectsReceiverSide[shadowIndex].GetComponent<MeshFilter>().mesh;
 					shadowMesh.vertices = recieverVertices;
+                    shadowMesh.triangles = mesh.triangles;
                     shadowMesh.RecalculateBounds();
+                    shadowMesh.RecalculateNormals();
 
                     shadowIndex++;
                 }
