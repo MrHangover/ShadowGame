@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject[] lights;
 	public LayerMask shadowLayer;
     Rigidbody body;
-	Collider playerCollider;
+	BoxCollider playerCollider;
 	bool isGrounded;
 	Vector3 tempVelocity;
 	Vector3 tempPosition;
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody>();
-		playerCollider = GetComponent<Collider>();
+		playerCollider = GetComponent<BoxCollider>();
 		isFrozen = false;
 		tempVelocity = body.velocity;
 		tempPosition = transform.position;
@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour {
 		isGrounded = false;
 		Vector3 rayOrigin;
 		if(verticalRayPrecision < 2){
-			rayOrigin = new Vector3(transform.position.x, transform.position.y - playerCollider.bounds.extents.y + 0.2f, transform.position.z);
+			rayOrigin = new Vector3(transform.position.x, transform.position.y - playerCollider.bounds.extents.y + 0.2f + playerCollider.center.y, transform.position.z);
 			RaycastHit hit;
 			if(Physics.Raycast(rayOrigin, Vector3.down, out hit, 0.25f, shadowLayer)){
 				isGrounded = true;
@@ -150,11 +150,11 @@ public class PlayerMovement : MonoBehaviour {
 		}else{
 			float spacing = playerCollider.bounds.size.z / (verticalRayPrecision - 1f);
 			for(int i = 0; i < verticalRayPrecision; i++){
-				rayOrigin = new Vector3(transform.position.x, transform.position.y - playerCollider.bounds.extents.y + 0.2f,
+				rayOrigin = new Vector3(transform.position.x, transform.position.y - playerCollider.bounds.extents.y + 0.2f + playerCollider.center.y,
 				                        transform.position.z - playerCollider.bounds.extents.z + spacing * i);
 				RaycastHit hit;
-				Debug.DrawRay(rayOrigin, Vector3.down * body.velocity.y * Time.fixedDeltaTime + Vector3.down * 0.21f, Color.red);
-				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, body.velocity.y * Time.fixedDeltaTime + 0.21f, shadowLayer)){
+				Debug.DrawRay(rayOrigin, Vector3.down * -body.velocity.y * Time.fixedDeltaTime + Vector3.down * 0.21f, Color.red);
+				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 0.21f, shadowLayer)){
 					isGrounded = true;
 				}
 			}
@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour {
                 rayOrigin = new Vector3(transform.position.x, transform.position.y,
                                         transform.position.z - playerCollider.bounds.extents.z + spacing * i);
                 RaycastHit hit;
-                if (Physics.Raycast(rayOrigin, Vector3.down, out hit, body.velocity.y * Time.fixedDeltaTime + 1.2f, shadowLayer))
+                if (Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 1.2f, shadowLayer))
                 {
                     isGrounded = true;
                     if (hit.point.y > highestGround)

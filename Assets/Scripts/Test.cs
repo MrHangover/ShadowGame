@@ -77,7 +77,6 @@ public class Test : MonoBehaviour {
                         worldVertices[i] = transform.TransformPoint(new Vector3(mesh.vertices[i].x, mesh.vertices[i].y, mesh.vertices[i].z));
                         //Ray ray = new Ray(transform.position + mesh.vertices[i], transform.position + mesh.vertices[i] - lights[j].transform.position);
                         Ray ray = new Ray(worldVertices[i], worldVertices[i] - lights[j].transform.position);
-                        Debug.DrawRay(worldVertices[i], worldVertices[i] - lights[j].transform.position, Color.red);
 						if(Physics.Raycast(ray, out hit, 1000f, wallLayer)){
                             Vector3 hitPoint = new Vector3(0.51f, hit.point.y, hit.point.z);
                             casterVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(hitPoint);

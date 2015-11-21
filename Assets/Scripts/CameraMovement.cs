@@ -7,6 +7,8 @@ public class CameraMovement : MonoBehaviour {
 	public float movementSpeed = 30f;
 	public float lookSensitivity = 10f;
 	public float movementLimitXAxis = 19f;
+    public float movementLimitYAxis = 19f;
+    public float movementLimitZAxis = 19f;
     int sideOfWall;
 	Light light;
 	float startSpotAngle;
@@ -44,12 +46,19 @@ public class CameraMovement : MonoBehaviour {
 		}
 
         Vector3 move;
-        Debug.Log("LightForward: " + Input.GetAxis("LightForward").ToString() + "\tLightBackward: " + Input.GetAxis("LightBackward").ToString());
+        float moveX = 0f, moveY = 0f, moveZ = 0f;
+        //Debug.Log("LightForward: " + Input.GetAxis("LightForward").ToString() + "\tLightBackward: " + Input.GetAxis("LightBackward").ToString());
         if(transform.position.x * sideOfWall > movementLimitXAxis || Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac) < 0f)
-		    move = new Vector3 ((Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac)) * transform.forward.x, input.y, input.z);
-        else
-            move = new Vector3(0f, input.y, input.z);
+		    moveX = (Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac)) * transform.forward.x;
+        //if(transform.position.y * -Mathf.Sign(input.y) < movementLimitYAxis){
+        //    moveY = 0f;
+        //}
+        //if (transform.position.z * -Mathf.Sign(input.z) < movementLimitZAxis)
+        //{
+        //    moveZ = 0f;
+        //}
 
+        move = new Vector3(moveX, input.y, input.z);
         transform.position += move * movementSpeed * Time.deltaTime;
 
 		if(light.spotAngle != startSpotAngle){
