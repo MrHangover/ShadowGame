@@ -11,8 +11,6 @@ public class CameraMovement : MonoBehaviour {
     public float movementLimitZAxis = 19f;
     int sideOfWall;
 	Light light;
-	float startSpotAngle;
-	float startIntensity;
     Vector3 respawnPosition;
     Quaternion respawnRotation;
     Animator animator;
@@ -22,8 +20,6 @@ public class CameraMovement : MonoBehaviour {
 	void Start () {
         sideOfWall = (int)Mathf.Sign(transform.position.x);
 		light = GetComponent<Light>();
-		startSpotAngle = light.spotAngle;
-		startIntensity = light.intensity;
         animator = GetComponent<Animator>();
         respawnPosition = transform.position;
         respawnRotation = transform.rotation;
@@ -46,7 +42,7 @@ public class CameraMovement : MonoBehaviour {
 		}
 
         Vector3 move;
-        float moveX = 0f, moveY = 0f, moveZ = 0f;
+        float moveX = 0f, moveY = input.y, moveZ = input.z;
         //Debug.Log("LightForward: " + Input.GetAxis("LightForward").ToString() + "\tLightBackward: " + Input.GetAxis("LightBackward").ToString());
         if(transform.position.x * sideOfWall > movementLimitXAxis || Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac) < 0f)
 		    moveX = (Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac)) * transform.forward.x;
@@ -61,24 +57,6 @@ public class CameraMovement : MonoBehaviour {
 
         move = new Vector3(moveX, moveY, moveZ);
         transform.position += move * movementSpeed * Time.deltaTime;
-
-		if(light.spotAngle != startSpotAngle){
-			light.spotAngle = Mathf.Lerp(light.spotAngle, startSpotAngle, 0.05f);
-			if(Mathf.Abs(light.spotAngle - startSpotAngle) < 0.01f){
-				light.spotAngle = startSpotAngle;
-			}
-		}
-		if(light.intensity != startIntensity){
-			light.intensity = Mathf.Lerp(light.intensity, startIntensity, 0.05f);
-			if(Mathf.Abs(light.intensity - startIntensity) < 0.01f){
-				light.intensity = startIntensity;
-			}
-		}
-	}
-
-	public void Flash(){
-		light.spotAngle = 179f;
-		light.intensity = 8f;
 	}
 
     public void Flicker()
