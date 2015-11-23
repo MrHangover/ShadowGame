@@ -50,15 +50,16 @@ public class CameraMovement : MonoBehaviour {
         //Debug.Log("LightForward: " + Input.GetAxis("LightForward").ToString() + "\tLightBackward: " + Input.GetAxis("LightBackward").ToString());
         if(transform.position.x * sideOfWall > movementLimitXAxis || Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac) < 0f)
 		    moveX = (Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac)) * transform.forward.x;
-        //if(transform.position.y * -Mathf.Sign(input.y) < movementLimitYAxis){
-        //    moveY = 0f;
-        //}
-        //if (transform.position.z * -Mathf.Sign(input.z) < movementLimitZAxis)
-        //{
-        //    moveZ = 0f;
-        //}
+        if (transform.position.y * Mathf.Sign(input.y) > movementLimitYAxis)
+        {
+            moveY = 0f;
+        }
+        if (transform.position.z * Mathf.Sign(input.z) > movementLimitZAxis)
+        {
+            moveZ = 0f;
+        }
 
-        move = new Vector3(moveX, input.y, input.z);
+        move = new Vector3(moveX, moveY, moveZ);
         transform.position += move * movementSpeed * Time.deltaTime;
 
 		if(light.spotAngle != startSpotAngle){

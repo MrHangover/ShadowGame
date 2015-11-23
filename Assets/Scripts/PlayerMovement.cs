@@ -46,9 +46,13 @@ public class PlayerMovement : MonoBehaviour {
 		//Pausing/stopping movement
 		if(isFrozen){
 			transform.position = tempPosition;
-		}
+        }
+        else
+        {
+            CheckCollisions();
+        }
 
-		if(transform.position.y < deathTriggerHeight){
+        if (transform.position.y < deathTriggerHeight){
 			Die();
 		}
 
@@ -63,8 +67,8 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if(!isFrozen){
-			CheckCollisions();
+        Debug.Log(isGrounded.ToString());
+        if (!isFrozen){
 			//Movement
 			if(body.velocity.z < maxSpeed && Input.GetAxis("HorizontalPlatform" + onMac) < 0f){
 				if(body.velocity.z - Input.GetAxis("HorizontalPlatform" + onMac) * acceleration < maxSpeed){
@@ -104,6 +108,7 @@ public class PlayerMovement : MonoBehaviour {
 			//Jumping
 			if(isGrounded && Input.GetButton("Jump" + onMac)){
 				jumpEnd = Time.time + jumpHoldTime;
+                isGrounded = false;
 			}
 			if(jumpEnd > Time.time && Input.GetButton("Jump" + onMac)){
 				body.velocity = new Vector3(body.velocity.x, jumpSpeed, body.velocity.z);
@@ -159,16 +164,18 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			}
 		}
-        if (oldGround && !isGrounded && body.velocity.y <= 0f && playerCollider.isTrigger == false)
+
+        //Sticking to platforms
+        if (oldGround && playerCollider.isTrigger == false)
         {
             float highestGround = -99999f;
             float spacing = playerCollider.bounds.size.z / (verticalRayPrecision - 1f);
             for (int i = 0; i < verticalRayPrecision; i++)
             {
-                rayOrigin = new Vector3(transform.position.x, transform.position.y,
+                rayOrigin = new Vector3(transform.position.x, transform.position.y + playerCollider.center.y,
                                         transform.position.z - playerCollider.bounds.extents.z + spacing * i);
                 RaycastHit hit;
-                if (Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 1.2f, shadowLayer))
+                if (Physics.Raycast(rayOrigin, Vector3.down, out hit, 1.2f, shadowLayer))
                 {
                     isGrounded = true;
                     if (hit.point.y > highestGround)
@@ -177,7 +184,8 @@ public class PlayerMovement : MonoBehaviour {
             }
             if (isGrounded)
             {
-                transform.position = new Vector3(transform.position.x, highestGround + playerCollider.bounds.extents.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x, highestGround + playerCollider.bounds.extents.y - playerCollider.center.y, transform.position.z);
+                body.velocity = new Vector3(body.velocity.x, 0f, body.velocity.z);
             }
         }
 	}
