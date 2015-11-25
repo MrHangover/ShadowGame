@@ -10,10 +10,10 @@ public class Test : MonoBehaviour {
 	List<GameObject> shadowObjectsReceiverSide;
     Mesh mesh;
 
-	public GameObject shadowObject;
-    public GameObject shadowFake;
-    public Material shadowMaterial;
+	GameObject shadowObject;
+    GameObject shadowFake;
 	public LayerMask wallLayer;
+    public Material shadowMaterial;
 
 	// Use this for initialization
 	void Start () {
@@ -22,13 +22,38 @@ public class Test : MonoBehaviour {
 		shadowObjectsCasterSide = new List<GameObject>();
 		shadowObjectsReceiverSide = new List<GameObject>();
         mesh = GetComponent<MeshFilter>().mesh;
-        Mesh tempShadow = shadowObject.GetComponent<MeshFilter>().mesh;
-        tempShadow.vertices = mesh.vertices;
-        tempShadow.triangles = mesh.triangles;
+        if (shadowMaterial == null)
+        {
+            shadowMaterial = GetComponent<MeshRenderer>().material;
+        }
 
-        tempShadow = shadowFake.GetComponent<MeshFilter>().mesh;
-        tempShadow.vertices = mesh.vertices;
-        tempShadow.triangles = mesh.triangles;
+        //Initializing GameObjects
+        shadowObject = new GameObject("shadowObject");
+        MeshFilter objMeshFilter = shadowObject.AddComponent<MeshFilter>();
+        MeshRenderer objMeshRend = shadowObject.AddComponent<MeshRenderer>();
+        MeshCollider objMeshCol = shadowObject.AddComponent<MeshCollider>();
+
+        objMeshFilter.mesh = mesh;
+        objMeshRend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        objMeshRend.receiveShadows = false;
+        objMeshRend.material = shadowMaterial;
+        objMeshCol.convex = true;
+        objMeshCol.isTrigger = false;
+        objMeshCol.sharedMesh = null;
+        objMeshCol.sharedMesh = objMeshFilter.mesh;
+
+        shadowObject.SetActive(false);
+
+        shadowFake = new GameObject("shadowFake");
+        MeshFilter fakeMeshFilter = shadowFake.AddComponent<MeshFilter>();
+        MeshRenderer fakeMeshRend = shadowFake.AddComponent<MeshRenderer>();
+
+        fakeMeshFilter.mesh = mesh;
+        fakeMeshRend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        fakeMeshRend.receiveShadows = false;
+        fakeMeshRend.material = shadowMaterial;
+
+        shadowFake.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -49,8 +74,10 @@ public class Test : MonoBehaviour {
             //Instantiate 2 shadow objects for each light (one on each side).
 			while(shadowObjectsCasterSide.Count < numOfLights){
 				shadowObjectsCasterSide.Add(Instantiate(shadowObject, transform.position, transform.rotation) as GameObject);
+                shadowObjectsCasterSide[shadowObjectsCasterSide.Count - 1].SetActive(true);
 				shadowObjectsReceiverSide.Add(Instantiate(shadowFake, transform.position, transform.rotation) as GameObject);
-			}
+                shadowObjectsReceiverSide[shadowObjectsReceiverSide.Count - 1].SetActive(true);
+            }
 
             for (int i = 0; i < shadowObjectsCasterSide.Count; i++){
                 shadowObjectsCasterSide[i].transform.position = transform.position;
@@ -88,7 +115,7 @@ public class Test : MonoBehaviour {
                     //Assign meshes and colliders
 					Mesh shadowMesh = shadowObjectsCasterSide[shadowIndex].GetComponent<MeshFilter>().mesh;
 					shadowMesh.vertices = casterVertices;
-                    shadowMesh.triangles = mesh.triangles;
+                    //shadowMesh.triangles = mesh.triangles;
                     shadowMesh.RecalculateBounds();
                     shadowMesh.RecalculateNormals();
                     MeshCollider meshCol = shadowObjectsCasterSide[shadowIndex].GetComponent<MeshCollider>();
@@ -97,7 +124,7 @@ public class Test : MonoBehaviour {
 
 					shadowMesh = shadowObjectsReceiverSide[shadowIndex].GetComponent<MeshFilter>().mesh;
 					shadowMesh.vertices = recieverVertices;
-                    shadowMesh.triangles = mesh.triangles;
+                    //shadowMesh.triangles = mesh.triangles;
                     shadowMesh.RecalculateBounds();
                     shadowMesh.RecalculateNormals();
 
