@@ -68,7 +68,6 @@ public class CameraMovement : MonoBehaviour {
     public void StopFlicker()
     {
         animator.SetBool("Flicker", false);
-        transform.position = respawnPosition;
         Invoke("Respawn", 0.5f);
     }
 
