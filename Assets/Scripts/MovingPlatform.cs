@@ -36,27 +36,26 @@ public class MovingPlatform : MonoBehaviour {
 
         if(Time.time > waitTill)
         {
-            Debug.Log("Moving!");
             float distanceToMove = speed * Time.deltaTime;
             float distanceFrom = Vector3.Distance(transform.position, fromPosition);
             float distanceTo = Vector3.Distance(transform.position, toPosition);
-            if(distanceFrom == 0f)
+            if(distanceFrom < 0.001f)
             {
                 distanceToMove = (speed / 20f) * Time.deltaTime;
             }
             else if(distanceFrom < distanceToMaxSpeed)
             {
-                distanceToMove = (distanceFrom / distanceToMaxSpeed + 0.05f * speed) * speed * Time.deltaTime;
+                distanceToMove = (distanceFrom / distanceToMaxSpeed) * speed * Time.deltaTime + 0.05f * speed * Time.deltaTime;
             }
             
-            if(distanceTo == 0f)
+            if(distanceTo < 0.001f)
             {
                 direction = -direction;
                 waitTill = Time.time + pauseTime;
             }
             else if(distanceTo < distanceToMaxSpeed)
             {
-                distanceToMove = (distanceTo / distanceToMaxSpeed + 0.05f * speed) * speed * Time.deltaTime;
+                distanceToMove = (distanceTo / distanceToMaxSpeed) * speed * Time.deltaTime + 0.05f * speed * Time.deltaTime;
             }
 
             transform.position = Vector3.MoveTowards(transform.position, toPosition, distanceToMove);

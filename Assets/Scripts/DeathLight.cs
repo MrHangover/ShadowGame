@@ -6,8 +6,11 @@ public class DeathLight : MonoBehaviour {
     public float angle = 10f;
     public float width = 1.02f;
     public float range = 60f;
+    public LayerMask thisLayer;
     Vector3[] vertices;
     MeshCollider meshCol;
+    GameObject player;
+    BoxCollider playerCollider;
 
     Mesh mesh;
     int[,,,] meshPos = new int[2, 2, 2, 3] { { { { -1, -1, -1 }, { -1, -1, -1 } },
@@ -17,6 +20,8 @@ public class DeathLight : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerCollider = player.GetComponent<BoxCollider>();
         mesh = GetComponent<MeshFilter>().mesh;
         vertices = mesh.vertices;
         for (int i = 0; i < mesh.vertices.Length; i++)
@@ -94,6 +99,15 @@ public class DeathLight : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Debug.DrawRay(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, Color.yellow);
+        if(Physics.Raycast(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, 99999f, thisLayer))
+        {
+            playerCollider.isTrigger = false;
+        }
+        else
+        {
+            playerCollider.isTrigger = true;
+        }
         meshCol = GetComponent<MeshCollider>();
         meshCol.sharedMesh = null;
         meshCol.sharedMesh = mesh;
