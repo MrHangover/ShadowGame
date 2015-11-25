@@ -46,7 +46,7 @@ public class CameraMovement : MonoBehaviour {
         //Debug.Log("LightForward: " + Input.GetAxis("LightForward").ToString() + "\tLightBackward: " + Input.GetAxis("LightBackward").ToString());
         if(transform.position.x * sideOfWall > movementLimitXAxis || Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac) < 0f)
 		    moveX = (Input.GetAxis("LightForward" + onMac) - Input.GetAxis("LightBackward" + onMac)) * transform.forward.x;
-        if ((transform.position.y + Camera.main.transform.position.y) * Mathf.Sign(input.y) > movementLimitYAxis)
+        if ((transform.position.y - Camera.main.transform.position.y) * Mathf.Sign(input.y) > movementLimitYAxis)
         {
             moveY = 0f;
         }
