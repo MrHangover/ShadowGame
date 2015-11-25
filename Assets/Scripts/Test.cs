@@ -12,12 +12,15 @@ public class Test : MonoBehaviour {
 
 	GameObject shadowObject;
     GameObject shadowFake;
+    LayerMask shadowLayer;
+
 	public LayerMask wallLayer;
     public Material shadowMaterial;
 
 	// Use this for initialization
 	void Start () {
-		localRenderer = GetComponent<Renderer>();
+        shadowLayer =  LayerMask.NameToLayer("Shadows");
+        localRenderer = GetComponent<Renderer>();
 		lights = FindObjectsOfType<Light>() as Light[];
 		shadowObjectsCasterSide = new List<GameObject>();
 		shadowObjectsReceiverSide = new List<GameObject>();
@@ -29,6 +32,7 @@ public class Test : MonoBehaviour {
 
         //Initializing GameObjects
         shadowObject = new GameObject("shadowObject");
+        shadowObject.layer = shadowLayer.value;
         MeshFilter objMeshFilter = shadowObject.AddComponent<MeshFilter>();
         MeshRenderer objMeshRend = shadowObject.AddComponent<MeshRenderer>();
         MeshCollider objMeshCol = shadowObject.AddComponent<MeshCollider>();

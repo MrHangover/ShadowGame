@@ -158,9 +158,9 @@ public class PlayerMovement : MonoBehaviour {
 				rayOrigin = new Vector3(transform.position.x, transform.position.y - playerCollider.bounds.extents.y + 0.2f + playerCollider.center.y,
 				                        transform.position.z - playerCollider.bounds.extents.z + spacing * i);
 				RaycastHit hit;
-				Debug.DrawRay(rayOrigin, Vector3.down * -body.velocity.y * Time.fixedDeltaTime + Vector3.down * 0.21f, Color.red);
+				//Debug.DrawRay(rayOrigin + Vector3.right * 0.7f, Vector3.down * -body.velocity.y * Time.fixedDeltaTime + Vector3.down * 0.21f, Color.red);
 				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 0.21f, shadowLayer)){
-					isGrounded = true;
+                    isGrounded = true;
 				}
 			}
 		}
@@ -175,6 +175,8 @@ public class PlayerMovement : MonoBehaviour {
                 rayOrigin = new Vector3(transform.position.x, transform.position.y + playerCollider.center.y,
                                         transform.position.z - playerCollider.bounds.extents.z + spacing * i);
                 RaycastHit hit;
+
+                //Debug.DrawRay(rayOrigin + Vector3.right, Vector3.down * 1.2f, Color.green);
                 if (Physics.Raycast(rayOrigin, Vector3.down, out hit, 1.2f, shadowLayer))
                 {
                     isGrounded = true;
@@ -187,18 +189,6 @@ public class PlayerMovement : MonoBehaviour {
                 transform.position = new Vector3(transform.position.x, highestGround + playerCollider.bounds.extents.y - playerCollider.center.y, transform.position.z);
                 body.velocity = new Vector3(body.velocity.x, 0f, body.velocity.z);
             }
-        }
-	}
-
-	void OnTriggerEnter(Collider other)
-    {
-		if(other.gameObject.tag != "DeathLight")
-        {
-            playerCollider.isTrigger = false;
-        }
-        else
-        {
-            playerCollider.isTrigger = true;
         }
 	}
 }
