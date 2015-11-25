@@ -17,6 +17,12 @@ public class PlayerMovement : MonoBehaviour {
     public int verticalRayPrecision = 4;
 	public GameObject[] lights;
 	public LayerMask shadowLayer;
+	//Sound stuff
+	public AudioClip jumpSound;
+	private AudioSource audio;
+	public float lowPitch = .50f;
+	public float highPitch = .80f;
+	//
     Rigidbody body;
 	BoxCollider playerCollider;
 	bool isGrounded;
@@ -39,6 +45,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             onMac = "Mac";
         }
+		audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -107,6 +114,8 @@ public class PlayerMovement : MonoBehaviour {
 
 			//Jumping
 			if(isGrounded && Input.GetButton("Jump" + onMac)){
+				audio.pitch = Random.Range(lowPitch, highPitch);
+				audio.PlayOneShot(jumpSound);
 				jumpEnd = Time.time + jumpHoldTime;
                 isGrounded = false;
 			}
