@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour {
 	Vector3 respawnPosition;
 	float jumpEnd;
     string onMac = "";
+    bool isColliding = false;
+    bool oldIsColliding = false;
 
 	// Use this for initialization
 	void Start () {
@@ -123,6 +125,14 @@ public class PlayerMovement : MonoBehaviour {
 				body.velocity = new Vector3(body.velocity.x, jumpSpeed, body.velocity.z);
 			}
 		}
+
+        if (!isColliding)
+        {
+            transform.parent = null;
+        }
+
+        oldIsColliding = isColliding;
+        isColliding = false;
 	}
 
 	void Die(){
@@ -203,9 +213,26 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
+        Debug.Log("Entered: " + other.gameObject.tag.ToString());
+        isColliding = true;
+        transform.parent = other.transform;
+        if(other.gameObject.tag == "ShadowCol")
+        {
+
+        }
         if(other.gameObject.tag == "Enemy")
         {
             Die();
         }
+    }
+
+    void OnCollision(Collision other)
+    {
+        Debug.Log("Stayed: " + other.gameObject.tag.ToString());
+    }
+
+    void OnCollisionExit(Collision other)
+    {
+        Debug.Log("Exited: " + other.gameObject.tag.ToString());
     }
 }

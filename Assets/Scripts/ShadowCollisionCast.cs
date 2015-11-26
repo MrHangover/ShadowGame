@@ -73,7 +73,14 @@ public class ShadowCollisionCast : MonoBehaviour {
         Vector3[] worldVertices = mesh.vertices;
         for (int j = 0; j < lights.Length; j++){
 			if(lights[j].enabled && lights[j].tag == "ShadowCast"){
-				for(int i = 0; i < casterVertices.Length / 2; i++){
+                Ray transRay = new Ray(transform.position, transform.position - lights[j].transform.position);
+                RaycastHit transHit;
+                if (Physics.Raycast(transRay, out transHit, 1000f, wallLayer))
+                {
+                    shadowObjectsCasterSide[shadowIndex].transform.position = transHit.point;
+                    shadowObjectsReceiverSide[shadowIndex].transform.position = transHit.point;
+                }
+                for (int i = 0; i < casterVertices.Length / 2; i++){
 					RaycastHit hit;
                     worldVertices[i] = transform.TransformPoint(new Vector3(mesh.vertices[i].x, mesh.vertices[i].y, mesh.vertices[i].z));
                     //Ray ray = new Ray(transform.position + mesh.vertices[i], transform.position + mesh.vertices[i] - lights[j].transform.position);
