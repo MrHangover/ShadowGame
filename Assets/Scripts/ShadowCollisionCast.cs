@@ -78,7 +78,6 @@ public class ShadowCollisionCast : MonoBehaviour {
                 if (Physics.Raycast(transRay, out transHit, 1000f, wallLayer))
                 {
                     shadowObjectsCasterSide[shadowIndex].transform.position = transHit.point;
-                    shadowObjectsReceiverSide[shadowIndex].transform.position = transHit.point;
                 }
                 for (int i = 0; i < casterVertices.Length / 2; i++){
 					RaycastHit hit;

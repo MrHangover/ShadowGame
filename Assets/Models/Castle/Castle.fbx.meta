@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 10095f5de159045ebae0b09e1dd7b9c4
-timeCreated: 1448296711
+guid: 027146d4fb2b34056bf221e054b1160d
+timeCreated: 1448547824
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Castle
+    4300000: Mesh
   materials:
     importMaterials: 1
     materialName: 0
