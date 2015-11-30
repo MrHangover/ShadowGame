@@ -8,17 +8,17 @@ public class DropToPosition : MonoBehaviour {
     public float timeToPosition =1f;
     float tempTime = 0f;
 
-    public bool isFalling = false;
+    public bool isFalling = true;
     public bool isPoppingUp = false;
 
 	// Use this for initialization
 	void Start () {
 
         if (isFalling) { 
-        desiredPosition = transform.position;
-        transform.position = new Vector3(transform.position.x, 35f, transform.position.z);
-        //timeToPosition = Random.value * 2f + 0.5f;
-        delay = Random.value / 0.65f + 0.5f;
+            desiredPosition = transform.position;
+            transform.position = new Vector3(transform.position.x, 35f, transform.position.z);
+            //timeToPosition = Random.value * 2f + 0.5f;
+            delay = Random.value / 0.65f + 0.5f;
         }
 
         if (isPoppingUp)
