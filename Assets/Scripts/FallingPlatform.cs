@@ -24,9 +24,8 @@ public class FallingPlatform : MonoBehaviour {
         toPosition = endPosition;
         fromPosition = startPosition;
 
-        if(Time.time > waitTill)
+        if (Time.time > waitTill)
         {
-            Debug.Log("Mhm");
             float distanceToMove = speed * Time.deltaTime;
             float distanceFrom = Vector3.Distance(transform.position, fromPosition);
             float distanceTo = Vector3.Distance(transform.position, toPosition);
@@ -38,13 +37,14 @@ public class FallingPlatform : MonoBehaviour {
             {
                 distanceToMove = (distanceFrom / distanceToMaxSpeed) * speed * Time.deltaTime + 0.05f * speed * Time.deltaTime;
             }
-            
-            if(distanceTo < 0.001f)
-            {
-                this.enabled = false;
-            }
 
             transform.position = Vector3.MoveTowards(transform.position, toPosition, distanceToMove);
         }
 	}
+
+    public void Reset()
+    {
+        waitTill = Time.time + waitTime;
+        transform.position = startPosition;
+    }
 }

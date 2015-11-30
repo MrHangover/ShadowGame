@@ -6,11 +6,17 @@ public class DeathLight : MonoBehaviour {
     public float angle = 10f;
     public float width = 1.02f;
     public float range = 60f;
+    public bool flicker;
+    public float onTime = 1f;
+    public float offTime = 1f;
     public LayerMask thisLayer;
     Vector3[] vertices;
     MeshCollider meshCol;
     GameObject player;
     BoxCollider playerCollider;
+    Light[] deathLight;
+    MeshRenderer meshRend;
+    bool isActive;
 
     Mesh mesh;
     int[,,,] meshPos = new int[2, 2, 2, 3] { { { { -1, -1, -1 }, { -1, -1, -1 } },
@@ -20,6 +26,8 @@ public class DeathLight : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        meshRend = GetComponent<MeshRenderer>();
+        deathLight = GetComponentsInChildren<Light>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<BoxCollider>();
         mesh = GetComponent<MeshFilter>().mesh;
@@ -95,21 +103,56 @@ public class DeathLight : MonoBehaviour {
         meshCol = GetComponent<MeshCollider>();
         meshCol.sharedMesh = null;
         meshCol.sharedMesh = mesh;
+        if (flicker)
+        {
+            Invoke("TurnOff", onTime);
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.DrawRay(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, Color.yellow);
-        if(Physics.Raycast(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, 99999f, thisLayer))
+        if (isActive)
         {
-            playerCollider.isTrigger = false;
+            Debug.DrawRay(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, Color.yellow);
+            if (Physics.Raycast(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, 99999f, thisLayer))
+            {
+                playerCollider.isTrigger = false;
+            }
+            else
+            {
+                playerCollider.isTrigger = true;
+            }
+            meshCol = GetComponent<MeshCollider>();
+            meshCol.sharedMesh = null;
+            meshCol.sharedMesh = mesh;
         }
         else
         {
-            playerCollider.isTrigger = true;
+            playerCollider.isTrigger = false;
         }
-        meshCol = GetComponent<MeshCollider>();
-        meshCol.sharedMesh = null;
-        meshCol.sharedMesh = mesh;
+    }
+
+    void TurnOn()
+    {
+        Invoke("TurnOff", onTime);
+        foreach(Light l in deathLight)
+        {
+            l.enabled = true;
+        }
+        isActive = true;
+        meshRend.enabled = true;
+        Debug.Log("Wash on!");
+    }
+
+    void TurnOff()
+    {
+        Invoke("TurnOn", offTime);
+        foreach (Light l in deathLight)
+        {
+            l.enabled = false;
+        }
+        isActive = false;
+        meshRend.enabled = false;
+        Debug.Log("Wash off!");
     }
 }

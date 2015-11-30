@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 	//
     Rigidbody body;
 	BoxCollider playerCollider;
-	bool isGrounded;
+	bool isGrounded = false;
 	Vector3 tempVelocity;
 	Vector3 tempPosition;
 	bool isFrozen;
@@ -34,9 +34,12 @@ public class PlayerMovement : MonoBehaviour {
     string onMac = "";
     bool isColliding = false;
     bool oldIsColliding = false;
+    FallingPlatform[] scriptsToReset;
+    ParticleSystem[] particleSystems;
 
 	// Use this for initialization
 	void Start () {
+        scriptsToReset = FindObjectsOfType<FallingPlatform>();
 		body = GetComponent<Rigidbody>();
 		playerCollider = GetComponent<BoxCollider>();
 		isFrozen = false;
@@ -48,17 +51,28 @@ public class PlayerMovement : MonoBehaviour {
             onMac = "Mac";
         }
 		audio = GetComponent<AudioSource>();
+        particleSystems = GetComponentsInChildren<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//Pausing/stopping movement
+        //Pausing/stopping movement
+        bool oldGround = isGrounded;
+
 		if(isFrozen){
 			transform.position = tempPosition;
         }
         else
         {
             CheckCollisions();
+        }
+
+        if(!oldGround && isGrounded)
+        {
+            foreach(ParticleSystem sys in particleSystems)
+            {
+                sys.Play();
+            }
         }
 
         if (transform.position.y < deathTriggerHeight){
@@ -76,7 +90,6 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-        Debug.Log(isGrounded.ToString());
         if (!isFrozen){
 			//Movement
 			if(body.velocity.z < maxSpeed && Input.GetAxis("HorizontalPlatform" + onMac) < 0f){
@@ -159,6 +172,10 @@ public class PlayerMovement : MonoBehaviour {
     {
         body.useGravity = true;
         isFrozen = false;
+        foreach(FallingPlatform plat in scriptsToReset)
+        {
+            plat.Reset();
+        }
     }
 
 	void CheckCollisions(){
