@@ -22,10 +22,12 @@ public class PlayerMovement : MonoBehaviour {
 	private AudioSource audio;
 	public float lowPitch = .50f;
 	public float highPitch = .80f;
-	//
+    //Animation
+    Animator anim;
     Rigidbody body;
 	BoxCollider playerCollider;
 	bool isGrounded = false;
+    bool jumping;
 	Vector3 tempVelocity;
 	Vector3 tempPosition;
 	bool isFrozen;
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        anim = GetComponent<Animator>();
         scriptsToReset = FindObjectsOfType<FallingPlatform>();
 		body = GetComponent<Rigidbody>();
 		playerCollider = GetComponent<BoxCollider>();
@@ -59,7 +62,9 @@ public class PlayerMovement : MonoBehaviour {
         //Pausing/stopping movement
         bool oldGround = isGrounded;
 
-		if(isFrozen){
+        
+
+		if (isFrozen){
 			transform.position = tempPosition;
         }
         else
@@ -67,7 +72,14 @@ public class PlayerMovement : MonoBehaviour {
             CheckCollisions();
         }
 
-        if(!oldGround && isGrounded)
+        if (isGrounded == true) { 
+       
+           anim.SetTrigger("Land");
+        }
+
+        anim.SetFloat("VelocityY", body.velocity.y);
+
+        if (!oldGround && isGrounded)
         {
             foreach(ParticleSystem sys in particleSystems)
             {
@@ -129,11 +141,13 @@ public class PlayerMovement : MonoBehaviour {
 
 			//Jumping
 			if(isGrounded && Input.GetButton("Jump" + onMac)){
-				audio.pitch = Random.Range(lowPitch, highPitch);
+                anim.SetTrigger("Jump");
+                audio.pitch = Random.Range(lowPitch, highPitch);
 				audio.PlayOneShot(jumpSound);
-				jumpEnd = Time.time + jumpHoldTime;
+                jumpEnd = Time.time + jumpHoldTime;
                 isGrounded = false;
 			}
+
 			if(jumpEnd > Time.time && Input.GetButton("Jump" + onMac)){
 				body.velocity = new Vector3(body.velocity.x, jumpSpeed, body.velocity.z);
 			}
