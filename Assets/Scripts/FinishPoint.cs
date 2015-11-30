@@ -22,7 +22,6 @@ public class FinishPoint : MonoBehaviour {
 			else{
 				Application.LoadLevel(0);
 			}
-			Debug.Log("We have liftoff!");
 		}
 	}
 }
