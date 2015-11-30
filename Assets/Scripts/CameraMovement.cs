@@ -59,6 +59,11 @@ public class CameraMovement : MonoBehaviour {
         transform.position += move * movementSpeed * Time.deltaTime;
 	}
 
+    void FixedUpdate()
+    {
+        Debug.Log("LightForward: " + Input.GetAxis("LightForward").ToString() + "\tLightBackward: " + Input.GetAxis("LightBackward").ToString());
+    }
+
     public void Flicker()
     {
         animator.SetBool("Flicker", true);
