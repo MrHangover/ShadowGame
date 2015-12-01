@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour {
     string onMac = "";
     bool isColliding = false;
     bool oldIsColliding = false;
+    bool isJumping = false;
     FallingPlatform[] scriptsToReset;
     ParticleSystem[] particleSystems;
 
@@ -62,8 +63,6 @@ public class PlayerMovement : MonoBehaviour {
         //Pausing/stopping movement
         bool oldGround = isGrounded;
 
-        
-
 		if (isFrozen){
 			transform.position = tempPosition;
         }
@@ -72,15 +71,14 @@ public class PlayerMovement : MonoBehaviour {
             CheckCollisions();
         }
 
-        if (isGrounded == true) { 
-       
-           anim.SetTrigger("Land");
-        }
+        anim.SetBool("Grounded", isGrounded);
 
         anim.SetFloat("VelocityY", body.velocity.y);
 
         if (!oldGround && isGrounded)
         {
+            isJumping = false;
+            Debug.Log("Touched ground!");
             foreach(ParticleSystem sys in particleSystems)
             {
                 sys.Play();
@@ -140,12 +138,12 @@ public class PlayerMovement : MonoBehaviour {
 			}
 
 			//Jumping
-			if(isGrounded && Input.GetButton("Jump" + onMac)){
-                anim.SetTrigger("Jump");
+			if(isGrounded && Input.GetButton("Jump" + onMac) && !isJumping){
+                isJumping = true;
+                anim.SetTrigger("StartJump");
                 audio.pitch = Random.Range(lowPitch, highPitch);
-				audio.PlayOneShot(jumpSound);
-                jumpEnd = Time.time + jumpHoldTime;
-                isGrounded = false;
+                audio.PlayOneShot(jumpSound);
+                Invoke("Jump", 0.20f);
 			}
 
 			if(jumpEnd > Time.time && Input.GetButton("Jump" + onMac)){
@@ -161,6 +159,13 @@ public class PlayerMovement : MonoBehaviour {
         oldIsColliding = isColliding;
         isColliding = false;
 	}
+
+    void Jump()
+    {
+        jumpEnd = Time.time + jumpHoldTime;
+        body.velocity = new Vector3(body.velocity.x, jumpSpeed, body.velocity.z);
+        isGrounded = false;
+    }
 
 	void Die(){
 		for(int i = 0; i < lights.Length; i++){
