@@ -165,6 +165,7 @@ public class PlayerMovement : MonoBehaviour {
         jumpEnd = Time.time + jumpHoldTime;
         body.velocity = new Vector3(body.velocity.x, jumpSpeed, body.velocity.z);
         isGrounded = false;
+        anim.SetTrigger("Jump");
     }
 
 	void Die(){
@@ -245,7 +246,12 @@ public class PlayerMovement : MonoBehaviour {
                 body.velocity = new Vector3(body.velocity.x, 0f, body.velocity.z);
             }
         }
-	}
+        if (oldGround && !isGrounded)
+        {
+            anim.SetTrigger("Jump");
+            Debug.Log("FUCKING WORK YOU PIECE OF SHIT");
+        }
+    }
 
     void OnCollisionEnter(Collision other)
     {
