@@ -1,36 +1,36 @@
 fileFormatVersion: 2
-guid: f4365ce31c33f8241ab0b8b22c2d490c
-timeCreated: 1449055489
+guid: 06672d692b22b0744829b70888ccc581
+timeCreated: 1449064100
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: SpriteFinal_0
-    21300002: SpriteFinal_1
-    21300004: SpriteFinal_2
-    21300006: SpriteFinal_3
-    21300008: SpriteFinal_4
-    21300010: SpriteFinal_5
-    21300012: SpriteFinal_6
-    21300014: SpriteFinal_7
-    21300016: SpriteFinal_8
-    21300018: SpriteFinal_9
-    21300020: SpriteFinal_10
-    21300022: SpriteFinal_11
-    21300024: SpriteFinal_12
-    21300026: SpriteFinal_13
-    21300028: SpriteFinal_14
-    21300030: SpriteFinal_15
-    21300032: SpriteFinal_16
-    21300034: SpriteFinal_17
-    21300036: SpriteFinal_18
-    21300038: SpriteFinal_19
-    21300040: SpriteFinal_20
-    21300042: SpriteFinal_21
-    21300044: SpriteFinal_22
-    21300046: SpriteFinal_23
-    21300048: SpriteFinal_24
-    21300050: SpriteFinal_25
-    21300052: SpriteFinal_26
+    21300000: SpriteSuperFinalMann!! 1_0
+    21300002: SpriteSuperFinalMann!! 1_1
+    21300004: SpriteSuperFinalMann!! 1_2
+    21300006: SpriteSuperFinalMann!! 1_3
+    21300008: SpriteSuperFinalMann!! 1_4
+    21300010: SpriteSuperFinalMann!! 1_5
+    21300012: SpriteSuperFinalMann!! 1_6
+    21300014: SpriteSuperFinalMann!! 1_7
+    21300016: SpriteSuperFinalMann!! 1_8
+    21300018: SpriteSuperFinalMann!! 1_9
+    21300020: SpriteSuperFinalMann!! 1_10
+    21300022: SpriteSuperFinalMann!! 1_11
+    21300024: SpriteSuperFinalMann!! 1_12
+    21300026: SpriteSuperFinalMann!! 1_13
+    21300028: SpriteSuperFinalMann!! 1_14
+    21300030: SpriteSuperFinalMann!! 1_15
+    21300032: SpriteSuperFinalMann!! 1_16
+    21300034: SpriteSuperFinalMann!! 1_17
+    21300036: SpriteSuperFinalMann!! 1_18
+    21300038: SpriteSuperFinalMann!! 1_19
+    21300040: SpriteSuperFinalMann!! 1_20
+    21300042: SpriteSuperFinalMann!! 1_21
+    21300044: SpriteSuperFinalMann!! 1_22
+    21300046: SpriteSuperFinalMann!! 1_23
+    21300048: SpriteSuperFinalMann!! 1_24
+    21300050: SpriteSuperFinalMann!! 1_25
+    21300052: SpriteSuperFinalMann!! 1_26
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,7 +56,7 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 8192
   textureSettings:
-    filterMode: 1
+    filterMode: -1
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -77,87 +77,27 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: SpriteFinal_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 5000
-        width: 1000
-        height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_1
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 5000
-        width: 1000
-        height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_2
-      rect:
-        serializedVersion: 2
-        x: 2007
-        y: 5000
-        width: 1000
-        height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .560000002}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_3
-      rect:
-        serializedVersion: 2
-        x: 3000
-        y: 5000
-        width: 1000
-        height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .800000012}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_4
-      rect:
-        serializedVersion: 2
-        x: 4000
-        y: 5000
-        width: 1000
-        height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .800000012}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_5
-      rect:
-        serializedVersion: 2
-        x: 5000
-        y: 5000
-        width: 1000
-        height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .800000012}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_6
+    - name: SpriteSuperFinalMann!! 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 4000
         width: 1000
         height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .800000012}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_7
+    - name: SpriteSuperFinalMann!! 1_1
       rect:
         serializedVersion: 2
         x: 1000
         y: 4000
         width: 1000
         height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .800000012}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_8
+    - name: SpriteSuperFinalMann!! 1_2
       rect:
         serializedVersion: 2
         x: 2000
@@ -167,87 +107,87 @@ TextureImporter:
       alignment: 9
       pivot: {x: .5, y: .800000012}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_9
+    - name: SpriteSuperFinalMann!! 1_3
       rect:
         serializedVersion: 2
         x: 3000
-        y: 3993
+        y: 4000
         width: 1000
         height: 1000
       alignment: 9
       pivot: {x: .5, y: .800000012}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_10
+    - name: SpriteSuperFinalMann!! 1_4
       rect:
         serializedVersion: 2
         x: 4000
         y: 4000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_5
+      rect:
+        serializedVersion: 2
+        x: 5000
+        y: 4000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_7
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_8
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_9
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_10
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 3000
         width: 1000
         height: 1000
       alignment: 9
       pivot: {x: .5, y: .699999988}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_11
-      rect:
-        serializedVersion: 2
-        x: 5000
-        y: 4000
-        width: 1000
-        height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_12
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 3000
-        width: 1000
-        height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .379999995}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_13
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 3000
-        width: 1000
-        height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .379999995}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_14
-      rect:
-        serializedVersion: 2
-        x: 2000
-        y: 3000
-        width: 1000
-        height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .379999995}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_15
-      rect:
-        serializedVersion: 2
-        x: 3000
-        y: 3000
-        width: 1000
-        height: 1000
-      alignment: 9
-      pivot: {x: .5, y: .379999995}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_16
-      rect:
-        serializedVersion: 2
-        x: 4000
-        y: 3000
-        width: 1000
-        height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_17
+    - name: SpriteSuperFinalMann!! 1_11
       rect:
         serializedVersion: 2
         x: 5000
@@ -257,7 +197,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_18
+    - name: SpriteSuperFinalMann!! 1_12
       rect:
         serializedVersion: 2
         x: 0
@@ -267,7 +207,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_19
+    - name: SpriteSuperFinalMann!! 1_13
       rect:
         serializedVersion: 2
         x: 1000
@@ -277,7 +217,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_20
+    - name: SpriteSuperFinalMann!! 1_14
       rect:
         serializedVersion: 2
         x: 2000
@@ -287,7 +227,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_21
+    - name: SpriteSuperFinalMann!! 1_15
       rect:
         serializedVersion: 2
         x: 3000
@@ -297,7 +237,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_22
+    - name: SpriteSuperFinalMann!! 1_16
       rect:
         serializedVersion: 2
         x: 4000
@@ -307,7 +247,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_23
+    - name: SpriteSuperFinalMann!! 1_17
       rect:
         serializedVersion: 2
         x: 5000
@@ -317,7 +257,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_24
+    - name: SpriteSuperFinalMann!! 1_18
       rect:
         serializedVersion: 2
         x: 0
@@ -327,7 +267,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_25
+    - name: SpriteSuperFinalMann!! 1_19
       rect:
         serializedVersion: 2
         x: 1000
@@ -337,11 +277,71 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteFinal_26
+    - name: SpriteSuperFinalMann!! 1_20
       rect:
         serializedVersion: 2
         x: 2000
         y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_21
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_22
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_23
+      rect:
+        serializedVersion: 2
+        x: 5000
+        y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_25
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteSuperFinalMann!! 1_26
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
         width: 1000
         height: 1000
       alignment: 0
