@@ -8,11 +8,15 @@ public class FallingPlatform : MonoBehaviour {
     public float speed = 8f;
     public float distanceToMaxSpeed = 2f;
     public float waitTime = 30f;
-
+    //Sound stuff
+    public AudioClip fall;
+    private AudioSource audio;
+    //
     float waitTill;
 
 	// Use this for initialization
 	void Start () {
+        audio = GetComponent<AudioSource>();
         transform.position = startPosition;
         waitTill = waitTime;
 	}
@@ -26,6 +30,7 @@ public class FallingPlatform : MonoBehaviour {
 
         if (Time.time > waitTill)
         {
+            audio.PlayOneShot(fall);
             float distanceToMove = speed * Time.deltaTime;
             float distanceFrom = Vector3.Distance(transform.position, fromPosition);
             float distanceTo = Vector3.Distance(transform.position, toPosition);

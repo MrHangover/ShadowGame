@@ -19,8 +19,13 @@ public class PlayerMovement : MonoBehaviour {
 	public LayerMask shadowLayer;
 	//Sound stuff
 	public AudioClip jumpSound;
-	private AudioSource audio;
-	public float lowPitch = .50f;
+    public AudioClip landSound;
+    public AudioClip deathSound;
+    private AudioSource audioJump;
+    private AudioSource audioLand;
+    private AudioSource audioDeath;
+    //
+    public float lowPitch = .50f;
 	public float highPitch = .80f;
     //Animation
     Animator anim;
@@ -54,7 +59,9 @@ public class PlayerMovement : MonoBehaviour {
         {
             onMac = "Mac";
         }
-		audio = GetComponent<AudioSource>();
+		audioJump = GetComponent<AudioSource>();
+        audioLand = GetComponent<AudioSource>();
+        audioDeath = GetComponent<AudioSource>();
         particleSystems = GetComponentsInChildren<ParticleSystem>();
 	}
 	
@@ -69,6 +76,11 @@ public class PlayerMovement : MonoBehaviour {
         else
         {
             CheckCollisions();
+        }
+
+        if (isGrounded)
+        {
+            audioLand.PlayOneShot(landSound);
         }
 
         anim.SetBool("Grounded", isGrounded);
@@ -141,8 +153,8 @@ public class PlayerMovement : MonoBehaviour {
 			if(isGrounded && Input.GetButton("Jump" + onMac) && !isJumping){
                 isJumping = true;
                 anim.SetTrigger("StartJump");
-                audio.pitch = Random.Range(lowPitch, highPitch);
-                audio.PlayOneShot(jumpSound);
+                audioJump.pitch = Random.Range(lowPitch, highPitch);
+                audioJump.PlayOneShot(jumpSound);
                 Invoke("Jump", 0.20f);
 			}
 
@@ -172,6 +184,7 @@ public class PlayerMovement : MonoBehaviour {
 		for(int i = 0; i < lights.Length; i++){
 			CameraMovement script = lights[i].GetComponent<CameraMovement>();
 			script.Flicker();
+            audioDeath.PlayOneShot(deathSound);
             Invoke("Respawn", 0.95f);
 		}
 	}

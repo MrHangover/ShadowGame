@@ -4,10 +4,14 @@ using System.Collections;
 public class FinishPoint : MonoBehaviour {
 	
 	public Material mat;
-	
-	// Use this for initialization
-	void Start () {
-	}
+    //Sound stuff
+    public AudioClip finish;
+    private AudioSource audio;
+
+    // Use this for initialization
+    void Start () {
+        audio = GetComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -16,7 +20,8 @@ public class FinishPoint : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.tag == "Player"){
-			if(Application.levelCount > Application.loadedLevel + 1){
+            audio.PlayOneShot(finish);
+            if (Application.levelCount > Application.loadedLevel + 1){
 				Application.LoadLevel(Application.loadedLevel + 1);
 			}
 			else{

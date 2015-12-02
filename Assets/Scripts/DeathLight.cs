@@ -17,6 +17,9 @@ public class DeathLight : MonoBehaviour {
     Light[] deathLight;
     MeshRenderer meshRend;
     bool isActive;
+    //Sound stuff
+    public AudioClip electricity;
+    private AudioSource audio;
 
     Mesh mesh;
     int[,,,] meshPos = new int[2, 2, 2, 3] { { { { -1, -1, -1 }, { -1, -1, -1 } },
@@ -26,6 +29,7 @@ public class DeathLight : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        audio = GetComponent<AudioSource>();
         meshRend = GetComponent<MeshRenderer>();
         deathLight = GetComponentsInChildren<Light>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -111,8 +115,10 @@ public class DeathLight : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (isActive)
         {
+            audio.Play();
             Debug.DrawRay(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, Color.yellow);
             if (Physics.Raycast(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, 99999f, thisLayer))
             {
