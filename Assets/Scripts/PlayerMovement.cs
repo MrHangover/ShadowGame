@@ -224,12 +224,13 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
         else{
-			float spacing = playerCollider.bounds.size.z / (verticalRayPrecision - 1f);
+            float skinWidth = 0.05f;
+			float spacing = playerCollider.bounds.size.z / (verticalRayPrecision - 1f) - skinWidth * 2 / (verticalRayPrecision - 1f);
 			for(int i = 0; i < verticalRayPrecision; i++){
 				rayOrigin = new Vector3(transform.position.x, transform.position.y + playerCollider.center.y,
-				                        transform.position.z - playerCollider.bounds.extents.z + spacing * i);
+				                        transform.position.z - playerCollider.bounds.extents.z + spacing * i + skinWidth);
 				RaycastHit hit;
-				//Debug.DrawRay(rayOrigin + Vector3.right * 0.7f, Vector3.down * -body.velocity.y * Time.fixedDeltaTime + Vector3.down * 0.21f, Color.red);
+                //Debug.DrawRay(rayOrigin + Vector3.right * 0.75f, Vector3.down * (-body.velocity.y * Time.fixedDeltaTime + 0.21f + playerCollider.bounds.extents.y), Color.green);
 				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 0.21f + playerCollider.bounds.extents.y, shadowLayer)){
                     isGrounded = true;
                     //transform.parent = hit.transform;
