@@ -220,8 +220,10 @@ public class PlayerMovement : MonoBehaviour {
 			RaycastHit hit;
 			if(Physics.Raycast(rayOrigin, Vector3.down, out hit, 0.25f, shadowLayer)){
 				isGrounded = true;
-			}
-		}else{
+                transform.parent = hit.transform;
+            }
+        }
+        else{
 			float spacing = playerCollider.bounds.size.z / (verticalRayPrecision - 1f);
 			for(int i = 0; i < verticalRayPrecision; i++){
 				rayOrigin = new Vector3(transform.position.x, transform.position.y - playerCollider.bounds.extents.y + 0.2f + playerCollider.center.y,
@@ -230,39 +232,14 @@ public class PlayerMovement : MonoBehaviour {
 				//Debug.DrawRay(rayOrigin + Vector3.right * 0.7f, Vector3.down * -body.velocity.y * Time.fixedDeltaTime + Vector3.down * 0.21f, Color.red);
 				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 0.21f, shadowLayer)){
                     isGrounded = true;
-				}
-			}
-		}
-
-        //Sticking to platforms
-        if (oldGround && playerCollider.isTrigger == false)
-        {
-            float highestGround = -99999f;
-            float spacing = playerCollider.bounds.size.z / (verticalRayPrecision - 1f);
-            for (int i = 0; i < verticalRayPrecision; i++)
-            {
-                rayOrigin = new Vector3(transform.position.x, transform.position.y + playerCollider.center.y,
-                                        transform.position.z - playerCollider.bounds.extents.z + spacing * i);
-                RaycastHit hit;
-
-                //Debug.DrawRay(rayOrigin + Vector3.right, Vector3.down * 1.2f, Color.green);
-                if (Physics.Raycast(rayOrigin, Vector3.down, out hit, 1.2f, shadowLayer))
-                {
-                    isGrounded = true;
-                    if (hit.point.y > highestGround)
-                        highestGround = hit.point.y;
+                    transform.parent = hit.transform;
                 }
             }
-            if (isGrounded)
-            {
-                transform.position = new Vector3(transform.position.x, highestGround + playerCollider.bounds.extents.y - playerCollider.center.y, transform.position.z);
-                body.velocity = new Vector3(body.velocity.x, 0f, body.velocity.z);
-            }
-        }
+		}
+
         if (oldGround && !isGrounded)
         {
             anim.SetTrigger("Jump");
-            Debug.Log("FUCKING WORK YOU PIECE OF SHIT");
         }
     }
 
@@ -270,7 +247,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         Debug.Log("Entered: " + other.gameObject.tag.ToString());
         isColliding = true;
-        transform.parent = other.transform;
+        //transform.parent = other.transform;
         if(other.gameObject.tag == "ShadowCol")
         {
 
