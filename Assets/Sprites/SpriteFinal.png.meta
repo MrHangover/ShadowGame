@@ -1,0 +1,353 @@
+fileFormatVersion: 2
+guid: f4365ce31c33f8241ab0b8b22c2d490c
+timeCreated: 1449055489
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SpriteFinal_0
+    21300002: SpriteFinal_1
+    21300004: SpriteFinal_2
+    21300006: SpriteFinal_3
+    21300008: SpriteFinal_4
+    21300010: SpriteFinal_5
+    21300012: SpriteFinal_6
+    21300014: SpriteFinal_7
+    21300016: SpriteFinal_8
+    21300018: SpriteFinal_9
+    21300020: SpriteFinal_10
+    21300022: SpriteFinal_11
+    21300024: SpriteFinal_12
+    21300026: SpriteFinal_13
+    21300028: SpriteFinal_14
+    21300030: SpriteFinal_15
+    21300032: SpriteFinal_16
+    21300034: SpriteFinal_17
+    21300036: SpriteFinal_18
+    21300038: SpriteFinal_19
+    21300040: SpriteFinal_20
+    21300042: SpriteFinal_21
+    21300044: SpriteFinal_22
+    21300046: SpriteFinal_23
+    21300048: SpriteFinal_24
+    21300050: SpriteFinal_25
+    21300052: SpriteFinal_26
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: 1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: SpriteFinal_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_1
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 5000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_2
+      rect:
+        serializedVersion: 2
+        x: 2007
+        y: 5000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .560000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_3
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 5000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_4
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 5000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_5
+      rect:
+        serializedVersion: 2
+        x: 5000
+        y: 5000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_7
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 4000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_8
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 4000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_9
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 3993
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .800000012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_10
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 4000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .699999988}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_11
+      rect:
+        serializedVersion: 2
+        x: 5000
+        y: 4000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .379999995}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_13
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .379999995}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_14
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .379999995}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_15
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 9
+      pivot: {x: .5, y: .379999995}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_16
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_17
+      rect:
+        serializedVersion: 2
+        x: 5000
+        y: 3000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_19
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 2000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_20
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 2000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_21
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 2000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_22
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 2000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_23
+      rect:
+        serializedVersion: 2
+        x: 5000
+        y: 2000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_25
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpriteFinal_26
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 1000
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
