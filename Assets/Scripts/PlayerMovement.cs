@@ -230,7 +230,7 @@ public class PlayerMovement : MonoBehaviour {
 				                        transform.position.z - playerCollider.bounds.extents.z + spacing * i);
 				RaycastHit hit;
 				//Debug.DrawRay(rayOrigin + Vector3.right * 0.7f, Vector3.down * -body.velocity.y * Time.fixedDeltaTime + Vector3.down * 0.21f, Color.red);
-				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 0.21f - playerCollider.bounds.extents.y, shadowLayer)){
+				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 0.21f + playerCollider.bounds.extents.y, shadowLayer)){
                     isGrounded = true;
                     transform.parent = hit.transform;
                 }
