@@ -236,7 +236,31 @@ public class PlayerMovement : MonoBehaviour {
                 }
             }
 		}
-
+        //Sticking to platforms
+         if (oldGround && playerCollider.isTrigger == false)
+         {
+             float highestGround = -99999f;
+             float spacing = playerCollider.bounds.size.z / (verticalRayPrecision - 1f);
+             for (int i = 0; i < verticalRayPrecision; i++)
+             {
+                 rayOrigin = new Vector3(transform.position.x, transform.position.y + playerCollider.center.y,
+                                         transform.position.z - playerCollider.bounds.extents.z + spacing * i);
+                 RaycastHit hit;
+ 
+                 //Debug.DrawRay(rayOrigin + Vector3.right, Vector3.down * 1.2f, Color.green);
+                 if (Physics.Raycast(rayOrigin, Vector3.down, out hit, 1.2f, shadowLayer))
+                 {
+                     isGrounded = true;
+                     if (hit.point.y > highestGround)
+                         highestGround = hit.point.y;
+                 }
+             }
+             if (isGrounded)
+             {
+                 transform.position = new Vector3(transform.position.x, highestGround + playerCollider.bounds.extents.y - playerCollider.center.y, transform.position.z);
+                 body.velocity = new Vector3(body.velocity.x, 0f, body.velocity.z);
+             }
+         }
         if (oldGround && !isGrounded)
         {
             anim.SetTrigger("Jump");
