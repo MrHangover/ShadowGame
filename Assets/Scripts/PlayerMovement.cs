@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (isGrounded)
         {
-            audioLand.PlayOneShot(landSound);
+            audioLand.PlayOneShot(landSound, 0.7F);
         }
 
         anim.SetBool("Grounded", isGrounded);
