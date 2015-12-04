@@ -78,34 +78,29 @@ public class PlayerMovement : MonoBehaviour {
             CheckCollisions();
         }
 
-        if (isGrounded)
-        {
-            audioLand.PlayOneShot(landSound, 0.7F);
-        }
-
         anim.SetBool("Grounded", isGrounded);
 
         anim.SetFloat("VelocityY", body.velocity.y);
 
         if (!oldGround && isGrounded)
         {
-            isJumping = false;
             Debug.Log("Touched ground!");
             foreach(ParticleSystem sys in particleSystems)
             {
                 sys.Play();
             }
+            audioLand.PlayOneShot(landSound, 0.7f);
         }
 
         if (transform.position.y < deathTriggerHeight){
 			Die();
 		}
 
-        if(body.velocity.z < 0f)
+        if(body.velocity.z < -0.05f)
         {
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 1f);
         }
-        else if(body.velocity.z > 0f)
+        else if(body.velocity.z > 0.05f)
         {
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, -1f);
         }
@@ -155,7 +150,8 @@ public class PlayerMovement : MonoBehaviour {
                 anim.SetTrigger("StartJump");
                 audioJump.pitch = Random.Range(lowPitch, highPitch);
                 audioJump.PlayOneShot(jumpSound);
-                Invoke("Jump", 0.20f);
+                Invoke("Jump", 0.15f);
+                Debug.Log("JUMP!");
 			}
 
 			if(jumpEnd > Time.time && Input.GetButton("Jump" + onMac)){
@@ -177,6 +173,7 @@ public class PlayerMovement : MonoBehaviour {
         jumpEnd = Time.time + jumpHoldTime;
         body.velocity = new Vector3(body.velocity.x, jumpSpeed, body.velocity.z);
         isGrounded = false;
+        isJumping = false;
         anim.SetTrigger("Jump");
     }
 
@@ -231,7 +228,7 @@ public class PlayerMovement : MonoBehaviour {
 				                        transform.position.z - playerCollider.bounds.extents.z + spacing * i + skinWidth);
 				RaycastHit hit;
                 //Debug.DrawRay(rayOrigin + Vector3.right * 0.75f, Vector3.down * (-body.velocity.y * Time.fixedDeltaTime + 0.21f + playerCollider.bounds.extents.y), Color.green);
-				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 0.21f + playerCollider.bounds.extents.y, shadowLayer)){
+				if(Physics.Raycast(rayOrigin, Vector3.down, out hit, -body.velocity.y * Time.fixedDeltaTime + 0.1f + playerCollider.bounds.extents.y, shadowLayer)){
                     isGrounded = true;
                     //transform.parent = hit.transform;
                 }
@@ -252,7 +249,7 @@ public class PlayerMovement : MonoBehaviour {
                 //Debug.DrawRay(rayOrigin + Vector3.right, Vector3.down * 1.2f, Color.green);
                 if (Physics.Raycast(rayOrigin, Vector3.down, out hit, 1.2f, shadowLayer))
                 {
-                    isGrounded = true;
+                    //1isGrounded = true;
                     if (hit.point.y > highestGround)
                         highestGround = hit.point.y;
                 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 06672d692b22b0744829b70888ccc581
-timeCreated: 1449244297
+timeCreated: 1449252387
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -105,7 +105,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .379999995}
+      pivot: {x: .5, y: .449999988}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_3
       rect:
