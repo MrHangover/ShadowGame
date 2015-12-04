@@ -13,7 +13,10 @@ public class CameraMovement : MonoBehaviour {
 	Light light;
     Vector3 respawnPosition;
     Quaternion respawnRotation;
+    Vector3 respawnRotationEuler;
     Animator animator;
+    float rotX;
+    float rotY;
     string onMac = "";
 
 	// Use this for initialization
@@ -23,6 +26,9 @@ public class CameraMovement : MonoBehaviour {
         animator = GetComponent<Animator>();
         respawnPosition = transform.position;
         respawnRotation = transform.rotation;
+        respawnRotationEuler = transform.eulerAngles;
+        rotX = transform.eulerAngles.x;
+        rotY = transform.eulerAngles.y;
         if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer)
         {
             onMac = "Mac";
@@ -31,12 +37,22 @@ public class CameraMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Mouse look
-		transform.Rotate(new Vector3(Input.GetAxis("Look Y" + onMac) * lookSensitivity, 0f, 0f));
-		transform.Rotate(new Vector3(0f, -Input.GetAxis("Look X" + onMac) * lookSensitivity * transform.forward.x, 0f), Space.World);
+        //Mouse look
+        rotX += Input.GetAxis("Look Y") * 500f * Time.deltaTime;
+        rotX = Mathf.Clamp(rotX, respawnRotationEuler.x - 60f,respawnRotationEuler.x + 60f);
+        rotY += Input.GetAxis("Look X") * 500f * sideOfWall * Time.deltaTime;
+        rotY = Mathf.Clamp(rotY, respawnRotationEuler.y - 60f, respawnRotationEuler.y + 60f);
+        transform.eulerAngles = new Vector3(rotX, rotY, 0f);
 
-		//Movement
-		Vector3 input = new Vector3 (0f, Input.GetAxis("VerticalLight" + onMac), Input.GetAxis("HorizontalLight" + onMac));
+        //transform.Rotate(new Vector3(Input.GetAxis("Look Y" + onMac) * lookSensitivity, 0f, 0f));
+        //transform.Rotate(new Vector3(0f, -Input.GetAxis("Look X" + onMac) * lookSensitivity * transform.forward.x, 0f), Space.World);
+        //if (Input.GetAxis("Look Y") == 0f && Input.GetAxis("Look X") == 0f)
+        //{
+
+        //}
+
+        //Movement
+        Vector3 input = new Vector3 (0f, Input.GetAxis("VerticalLight" + onMac), Input.GetAxis("HorizontalLight" + onMac));
 		if (input.magnitude > 1f){
 			input.Normalize ();
 		}

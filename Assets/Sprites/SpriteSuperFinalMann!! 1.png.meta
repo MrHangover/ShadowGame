@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 06672d692b22b0744829b70888ccc581
-timeCreated: 1449064100
+timeCreated: 1449244297
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -84,8 +84,8 @@ TextureImporter:
         y: 4000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_1
       rect:
@@ -94,8 +94,8 @@ TextureImporter:
         y: 4000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_2
       rect:
@@ -105,7 +105,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .800000012}
+      pivot: {x: .5, y: .379999995}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_3
       rect:
@@ -115,7 +115,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .800000012}
+      pivot: {x: .5, y: .600000024}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_4
       rect:
@@ -125,7 +125,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .800000012}
+      pivot: {x: .5, y: .600000024}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_5
       rect:
@@ -135,7 +135,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .800000012}
+      pivot: {x: .5, y: .600000024}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_6
       rect:
@@ -145,7 +145,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .800000012}
+      pivot: {x: .5, y: .600000024}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_7
       rect:
@@ -155,7 +155,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .800000012}
+      pivot: {x: .5, y: .600000024}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_8
       rect:
@@ -165,7 +165,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .800000012}
+      pivot: {x: .5, y: .600000024}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_9
       rect:
@@ -175,7 +175,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .800000012}
+      pivot: {x: .5, y: .600000024}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_10
       rect:
@@ -185,7 +185,7 @@ TextureImporter:
         width: 1000
         height: 1000
       alignment: 9
-      pivot: {x: .5, y: .699999988}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_11
       rect:
@@ -194,8 +194,8 @@ TextureImporter:
         y: 3000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .300000012}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_12
       rect:
@@ -204,8 +204,8 @@ TextureImporter:
         y: 2000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .200000003}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_13
       rect:
@@ -214,8 +214,8 @@ TextureImporter:
         y: 2000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .200000003}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_14
       rect:
@@ -224,8 +224,8 @@ TextureImporter:
         y: 2000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .200000003}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_15
       rect:
@@ -234,8 +234,8 @@ TextureImporter:
         y: 2000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .200000003}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_16
       rect:
@@ -244,8 +244,8 @@ TextureImporter:
         y: 2000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_17
       rect:
@@ -254,8 +254,8 @@ TextureImporter:
         y: 2000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_18
       rect:
@@ -264,8 +264,8 @@ TextureImporter:
         y: 1000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_19
       rect:
@@ -274,8 +274,8 @@ TextureImporter:
         y: 1000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_20
       rect:
@@ -284,8 +284,8 @@ TextureImporter:
         y: 1000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_21
       rect:
@@ -294,8 +294,8 @@ TextureImporter:
         y: 1000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_22
       rect:
@@ -304,8 +304,8 @@ TextureImporter:
         y: 1000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_23
       rect:
@@ -314,8 +314,8 @@ TextureImporter:
         y: 1000
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_24
       rect:
@@ -324,8 +324,8 @@ TextureImporter:
         y: 0
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_25
       rect:
@@ -334,8 +334,8 @@ TextureImporter:
         y: 0
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SpriteSuperFinalMann!! 1_26
       rect:
@@ -344,8 +344,8 @@ TextureImporter:
         y: 0
         width: 1000
         height: 1000
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: .0500000007}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
