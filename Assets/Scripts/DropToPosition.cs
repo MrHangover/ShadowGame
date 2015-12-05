@@ -18,7 +18,7 @@ public class DropToPosition : MonoBehaviour {
             desiredPosition = transform.position;
             transform.position = new Vector3(transform.position.x, 35f, transform.position.z);
             //timeToPosition = Random.value * 2f + 0.5f;
-            delay = Random.value / 0.65f + 0.5f;
+            //delay = Random.value / 0.65f + 0.5f;
         }
 
         if (isPoppingUp)
@@ -26,7 +26,7 @@ public class DropToPosition : MonoBehaviour {
             desiredPosition = transform.position;
             transform.position = new Vector3(transform.position.x, -35f, transform.position.z);
             //timeToPosition = Random.value * 2f + 0.5f;
-            delay = Random.value / 0.65f + 0.5f;
+            //delay = Random.value / 0.65f + 0.5f;
         }
     }
 	
