@@ -117,8 +117,7 @@ public class DeathLight : MonoBehaviour {
 	void Update () {
 
         if (isActive)
-        {
-            audio.Play();
+        {     
             Debug.DrawRay(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, Color.yellow);
             if (Physics.Raycast(player.transform.position, (transform.position - transform.up * 5f) - player.transform.position, 99999f, thisLayer))
             {
@@ -140,6 +139,7 @@ public class DeathLight : MonoBehaviour {
 
     void TurnOn()
     {
+        audio.Play();
         Invoke("TurnOff", onTime);
         foreach(Light l in deathLight)
         {

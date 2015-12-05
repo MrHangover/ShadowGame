@@ -178,12 +178,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 	void Die(){
-		for(int i = 0; i < lights.Length; i++){
+        for (int i = 0; i < lights.Length; i++){
 			CameraMovement script = lights[i].GetComponent<CameraMovement>();
-			script.Flicker();
             audioDeath.PlayOneShot(deathSound);
+            script.Flicker();
             Invoke("Respawn", 0.95f);
-		}
+        }
 	}
 
     void Respawn()
