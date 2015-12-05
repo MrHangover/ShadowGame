@@ -21,9 +21,11 @@ public class PlayerMovement : MonoBehaviour {
 	public AudioClip jumpSound;
     public AudioClip landSound;
     public AudioClip deathSound;
+    public AudioClip enemySound;
     private AudioSource audioJump;
     private AudioSource audioLand;
     private AudioSource audioDeath;
+    private AudioSource audioEnemy;
     //
     public float lowPitch = .50f;
 	public float highPitch = .80f;
@@ -62,6 +64,7 @@ public class PlayerMovement : MonoBehaviour {
 		audioJump = GetComponent<AudioSource>();
         audioLand = GetComponent<AudioSource>();
         audioDeath = GetComponent<AudioSource>();
+        audioEnemy = GetComponent<AudioSource>();
         particleSystems = GetComponentsInChildren<ParticleSystem>();
 	}
 	
@@ -281,6 +284,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         if(other.gameObject.tag == "Enemy")
         {
+            audioEnemy.PlayOneShot(enemySound);
             Die();
         }
     }
