@@ -117,6 +117,7 @@ public class ShadowMeshCast : MonoBehaviour
                             Vector3 hitPoint = new Vector3(0.51f, hit.point.y, hit.point.z);
                             casterVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(hitPoint);
                             recieverVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(hitPoint - Vector3.right * 1.02f);
+                            //recieverVertices[i] = shadowObjectsCasterSide[shadowIndex].transform.InverseTransformPoint(casterVertices[i] - Vector3.right * 1.02f);
                         }
                     }
 

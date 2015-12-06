@@ -22,6 +22,11 @@ public class MessageScript : MonoBehaviour {
         {
             alpha = 0f;
         }
+
+        timeBeforeVisibleFade += Time.time;
+        visibleFadeTime += Time.time;
+        timeBeforeDissapearFade += Time.time;
+        dissapearFadeTime += Time.time;
 	}
 
 	// Update is called once per frame
