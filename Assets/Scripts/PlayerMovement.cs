@@ -97,6 +97,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (transform.position.y < deathTriggerHeight){
 			Die();
+            transform.position += Vector3.up * 9999f;
 		}
 
         if(body.velocity.z < -0.05f)
