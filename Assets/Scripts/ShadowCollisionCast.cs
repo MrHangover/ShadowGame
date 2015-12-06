@@ -13,6 +13,8 @@ public class ShadowCollisionCast : MonoBehaviour {
 
     public bool isEnemy = false;
 	public LayerMask wallLayer;
+    public bool startButton = false;
+    public bool quitButton = false;
 
 	// Use this for initialization
 	void Start () {
@@ -55,6 +57,8 @@ public class ShadowCollisionCast : MonoBehaviour {
 		while(shadowObjectsCasterSide.Count < numOfLights){
 			shadowObjectsCasterSide.Add(Instantiate(shadowObject, transform.position, transform.rotation) as GameObject);
             shadowObjectsCasterSide[shadowObjectsCasterSide.Count - 1].SetActive(true);
+            if (startButton) shadowObjectsCasterSide[shadowObjectsCasterSide.Count - 1].AddComponent<StartButton>();
+            if (quitButton) shadowObjectsCasterSide[shadowObjectsCasterSide.Count - 1].AddComponent<QuitButton>();
         }
 
         for (int i = 0; i < shadowObjectsCasterSide.Count; i++){
