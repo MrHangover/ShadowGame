@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour {
     public int verticalRayPrecision = 4;
 	public GameObject[] lights;
 	public LayerMask shadowLayer;
+    [Range(5f, 80f)]
+    public float maxClimbAngle = 70f;
+    [Range(5f, 80f)]
+    public float maxDescendAngle = 50f;
 	//Sound stuff
 	public AudioClip jumpSound;
     public AudioClip landSound;
@@ -44,11 +48,19 @@ public class PlayerMovement : MonoBehaviour {
     bool isColliding = false;
     bool oldIsColliding = false;
     bool isJumping = false;
+    Vector3 spriteStartPosition;
+    Vector3 spriteStartRotation;
+    Transform[] sprites;
     FallingPlatform[] scriptsToReset;
     ParticleSystem[] particleSystems;
 
 	// Use this for initialization
 	void Start () {
+        sprites = new Transform[2];
+        sprites[0] = transform.FindChild("SpriteFront");
+        sprites[1] = transform.FindChild("SpriteBack");
+        spriteStartPosition = sprites[0].localPosition;
+        spriteStartRotation = sprites[0].localEulerAngles;
         anim = GetComponent<Animator>();
         scriptsToReset = FindObjectsOfType<FallingPlatform>();
 		body = GetComponent<Rigidbody>();
@@ -73,12 +85,9 @@ public class PlayerMovement : MonoBehaviour {
         //Pausing/stopping movement
         bool oldGround = isGrounded;
 
-		if (isFrozen){
-			transform.position = tempPosition;
-        }
-        else
+        if (isFrozen)
         {
-            CheckCollisions();
+            transform.position = tempPosition;
         }
 
         anim.SetBool("Grounded", isGrounded);
@@ -161,6 +170,8 @@ public class PlayerMovement : MonoBehaviour {
 			if(jumpEnd > Time.time && Input.GetButton("Jump" + onMac)){
 				body.velocity = new Vector3(body.velocity.x, jumpSpeed, body.velocity.z);
 			}
+
+            CheckCollisions();
 		}
 
         if (!isColliding)
@@ -213,6 +224,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 	void CheckCollisions(){
+        foreach (Transform sprite in sprites)
+        {
+            sprite.localPosition = new Vector3(sprite.localPosition.x, spriteStartPosition.y, spriteStartPosition.z);
+            sprite.localEulerAngles = spriteStartRotation;
+        }
+
         bool oldGround = isGrounded;
 		isGrounded = false;
 		Vector3 rayOrigin;
@@ -248,6 +265,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 rayOrigin = new Vector3(transform.position.x, transform.position.y + playerCollider.center.y,
                                         transform.position.z - playerCollider.bounds.extents.z + spacing * i);
+
                 RaycastHit hit;
 
                 //Debug.DrawRay(rayOrigin + Vector3.right, Vector3.down * 1.2f, Color.green);
@@ -264,6 +282,66 @@ public class PlayerMovement : MonoBehaviour {
                 body.velocity = new Vector3(body.velocity.x, 0f, body.velocity.z);
             }
         }
+
+        //Slope climbing DO NOT TOUCH BITTE PLZ
+        //if (Input.GetAxis("HorizontalPlatform" + onMac) != 0f)
+        //{
+            float directionZ = -Mathf.Sign(transform.localScale.z);
+            float rayLength = Mathf.Abs(body.velocity.z) * Time.fixedDeltaTime + 0.02f;
+
+            rayOrigin = (directionZ < 0f) ? new Vector3(transform.position.x, transform.position.y + playerCollider.center.y - playerCollider.bounds.extents.y + 0.02f, transform.position.z - playerCollider.bounds.extents.z) : new Vector3(
+                transform.position.x, transform.position.y + playerCollider.center.y - playerCollider.bounds.extents.y + 0.02f, transform.position.z + playerCollider.bounds.extents.z);
+
+            RaycastHit hitHorizontal;
+            Debug.DrawRay(rayOrigin + Vector3.right, Vector3.forward * directionZ * rayLength, Color.red);
+
+            if (Physics.Raycast(rayOrigin, Vector3.forward * directionZ, out hitHorizontal, rayLength, shadowLayer))
+            {
+                Vector2 normal2D = new Vector2(hitHorizontal.normal.z, hitHorizontal.normal.y);
+                float slopeAngle = Vector2.Angle(normal2D, Vector2.up);
+                if (slopeAngle <= maxClimbAngle)
+                {
+                    isGrounded = true;
+                    float moveDistance = Mathf.Abs(body.velocity.z);
+                    float climbVelocityY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
+                    float climbVelocityZ = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(body.velocity.z);
+                    body.velocity = new Vector3(body.velocity.x, climbVelocityY, climbVelocityZ);
+                    foreach (Transform sprite in sprites)
+                    {
+                        //sprite.RotateAround(sprite.position + Vector3.up * 1.5f * -directionZ - Vector3.forward * -directionZ, Vector3.right, slopeAngle);
+                        sprite.RotateAround(sprite.position + Vector3.down * 1f * directionZ + Vector3.forward * 0.5f * directionZ, Vector3.right, slopeAngle);
+                    }
+                }
+            }
+
+            rayLength = 0.05f + Mathf.Abs(body.velocity.y) * Time.fixedDeltaTime;
+
+            rayOrigin = (directionZ < 0f) ? new Vector3(transform.position.x, transform.position.y + playerCollider.center.y - playerCollider.bounds.extents.y + 0.02f, transform.position.z + playerCollider.bounds.extents.z) : new Vector3(
+                transform.position.x, transform.position.y + playerCollider.center.y - playerCollider.bounds.extents.y + 0.02f, transform.position.z - playerCollider.bounds.extents.z);
+
+            RaycastHit hitVertical;
+
+            Debug.DrawRay(rayOrigin + Vector3.right, Vector3.down * rayLength, Color.green);
+            if (Physics.Raycast(rayOrigin, Vector3.down, out hitVertical, rayLength, shadowLayer) && !isJumping)
+            {
+                Vector2 normal2D = new Vector2(hitVertical.normal.z, hitVertical.normal.y);
+                float slopeAngle = Vector2.Angle(normal2D, Vector2.up);
+                if (slopeAngle <= maxDescendAngle && slopeAngle > 5f)
+                {
+                    Debug.Log(slopeAngle);
+                    isGrounded = true;
+                    float moveDistance = Mathf.Abs(body.velocity.z);
+                    float climbVelocityY = -Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
+                    float climbVelocityZ = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(body.velocity.z);
+                    body.velocity = new Vector3(body.velocity.x, climbVelocityY, climbVelocityZ);
+                    foreach (Transform sprite in sprites)
+                    {
+                        sprite.RotateAround(sprite.position + Vector3.down * 1f * directionZ - Vector3.forward * 0.5f * directionZ, Vector3.right, -slopeAngle);
+                    }
+                }
+            }
+        //}
+
         if (oldGround && !isGrounded)
         {
             anim.SetTrigger("Jump");
@@ -272,7 +350,6 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Entered: " + other.gameObject.tag.ToString());
         isColliding = true;
         //transform.parent = other.transform;
         if (isGrounded)
@@ -288,15 +365,5 @@ public class PlayerMovement : MonoBehaviour {
             audioEnemy.PlayOneShot(enemySound);
             Die();
         }
-    }
-
-    void OnCollision(Collision other)
-    {
-        Debug.Log("Stayed: " + other.gameObject.tag.ToString());
-    }
-
-    void OnCollisionExit(Collision other)
-    {
-        Debug.Log("Exited: " + other.gameObject.tag.ToString());
     }
 }

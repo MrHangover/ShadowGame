@@ -77,7 +77,7 @@ public class CameraMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
-        Debug.Log("LightForward: " + Input.GetAxis("LightForward").ToString() + "\tLightBackward: " + Input.GetAxis("LightBackward").ToString());
+        //Debug.Log("LightForward: " + Input.GetAxis("LightForward").ToString() + "\tLightBackward: " + Input.GetAxis("LightBackward").ToString());
     }
 
     public void Flicker()
