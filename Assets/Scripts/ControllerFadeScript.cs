@@ -9,6 +9,10 @@ public class ControllerFadeScript : MonoBehaviour {
     public float visibleFadeTime = 1f;
     public float timeBeforeDissapearFade = 5f;
     public float dissapearFadeTime = 1f;
+	float tempTimeBeforeVisibleFade = 0f;
+	float tempVisibleFadeTime = 1f;
+	float tempTimeBeforeDissapearFade = 5f;
+	float tempDissapearFadeTime = 1f;
     UnityEngine.UI.Image image;
 
 	// Use this for initialization
@@ -23,25 +27,25 @@ public class ControllerFadeScript : MonoBehaviour {
             alpha = 0f;
         }
 
-        timeBeforeVisibleFade = Time.time + timeBeforeVisibleFade;
-        visibleFadeTime = Time.time + visibleFadeTime;
-        timeBeforeDissapearFade = Time.time + timeBeforeDissapearFade;
-        dissapearFadeTime = Time.time + dissapearFadeTime;
+        tempTimeBeforeVisibleFade = Time.time + timeBeforeVisibleFade;
+        tempVisibleFadeTime = Time.time + visibleFadeTime;
+        tempTimeBeforeDissapearFade = Time.time + timeBeforeDissapearFade;
+        tempDissapearFadeTime = Time.time + dissapearFadeTime;
 	}
 
 	// Update is called once per frame
 	void Update () {
-	    if(Time.time > timeBeforeVisibleFade)
+	    if(Time.time > tempTimeBeforeVisibleFade)
         {
-            alpha = (Time.time - timeBeforeVisibleFade) / visibleFadeTime; 
+            alpha = (Time.time - tempTimeBeforeVisibleFade) / tempVisibleFadeTime; 
         }
-        if (Time.time > timeBeforeDissapearFade)
+        if (Time.time > tempTimeBeforeDissapearFade)
         {
-            alpha = ((timeBeforeDissapearFade - Time.time) + dissapearFadeTime) / dissapearFadeTime;
+            alpha = ((tempTimeBeforeDissapearFade - Time.time) + tempDissapearFadeTime) / tempDissapearFadeTime;
         }
         alpha = Mathf.Clamp(alpha, 0f, 1f);
         image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
-        if(alpha == 0f && Time.time > timeBeforeDissapearFade)
+        if(alpha == 0f && Time.time > tempTimeBeforeDissapearFade)
         {
             Destroy(gameObject);
         }

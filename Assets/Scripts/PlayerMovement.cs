@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (transform.position.y < deathTriggerHeight){
 			Die();
-            transform.position += Vector3.up * 9999f;
+			audioDeath.PlayOneShot(deathSound);
 		}
 
         if(body.velocity.z < -0.05f)
@@ -195,7 +195,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Die(){
         for (int i = 0; i < lights.Length; i++){
 			CameraMovement script = lights[i].GetComponent<CameraMovement>();
-            audioDeath.PlayOneShot(deathSound);
+			transform.position += Vector3.up * 9999f;
             script.Flicker();
             Invoke("Respawn", 0.95f);
         }
