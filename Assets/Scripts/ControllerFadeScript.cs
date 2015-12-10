@@ -23,10 +23,10 @@ public class ControllerFadeScript : MonoBehaviour {
             alpha = 0f;
         }
 
-        timeBeforeVisibleFade += Time.time;
-        visibleFadeTime += Time.time;
-        timeBeforeDissapearFade += Time.time;
-        dissapearFadeTime += Time.time;
+        timeBeforeVisibleFade = Time.time + timeBeforeVisibleFade;
+        visibleFadeTime = Time.time + visibleFadeTime;
+        timeBeforeDissapearFade = Time.time + timeBeforeDissapearFade;
+        dissapearFadeTime = Time.time + dissapearFadeTime;
 	}
 
 	// Update is called once per frame
