@@ -18,7 +18,7 @@ public class FallingPlatform : MonoBehaviour {
 	void Start () {
         audio = GetComponent<AudioSource>();
         transform.position = startPosition;
-        waitTill = waitTime;
+        waitTill = waitTime + Time.time;
 	}
 	
 	// Update is called once per frame
@@ -47,7 +47,7 @@ public class FallingPlatform : MonoBehaviour {
         }
 	}
 
-    public void Reset()
+    public void Reset() 
     {
         waitTill = Time.time + waitTime;
         transform.position = startPosition;
